@@ -972,30 +972,31 @@
       transform: translateY(0);
     }
 
-    /* ─── RESPONSIVE ─── */
+    /* ─── RESPONSIVE — TABLET ─── */
     @media (max-width: 960px) {
-      nav { padding: 0 24px; }
+      nav { padding: 0 20px; }
       .nav-links { display: none; }
       .nav-book { display: none; }
       .nav-hamburger { display: flex; }
 
-      .hero { padding: 80px 32px; }
-      .hero-scroll { right: 32px; }
+      .hero { padding: 28px 24px 36px; }
+      .hero-scroll { display: none; }
 
-      .about { grid-template-columns: 1fr; }
-      .about-photo { height: 50vw; min-height: 280px; }
-      .about-text { padding: 56px 32px; }
-      .about-stats { flex-wrap: wrap; gap: 24px; }
+      .about { grid-template-columns: 1fr; max-height: none; }
+      .about-photo { height: 46vw; min-height: 240px; max-height: 320px; }
+      .about-text { padding: 36px 24px; }
+      .about-stats { flex-wrap: wrap; gap: 20px; }
 
-      .services { padding: 72px 32px; }
-      .services-header { flex-direction: column; align-items: flex-start; gap: 12px; }
-      .services-header p { text-align: left; }
+      .services { padding: 48px 20px; }
+      .services-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .services-header p { text-align: left; max-width: 100%; }
       .services-grid { grid-template-columns: 1fr; }
+      .services-footer { flex-direction: column; align-items: flex-start; gap: 14px; }
 
-      .gallery { padding: 72px 32px; }
+      .gallery { padding: 48px 20px; }
       .gallery-editorial {
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 220px 220px 220px 220px 220px 220px;
+        grid-template-rows: 160px 160px 160px 160px 160px 160px;
       }
       .g1 { grid-column: 1; grid-row: 1; }
       .g2 { grid-column: 2; grid-row: 1; }
@@ -1010,25 +1011,85 @@
       .g11 { grid-column: 1; grid-row: 6; }
       .g12 { grid-column: 2; grid-row: 6; }
 
-      .team { padding: 72px 32px; }
+      .reviews-section { padding: 48px 20px; }
+      .review-cards { grid-template-columns: 1fr; }
+
+      .team { padding: 48px 20px; }
       .team-grid { grid-template-columns: 1fr 1fr; }
+      .team-header { margin-bottom: 20px; }
 
-      .location { padding: 72px 32px; }
-      .location-grid { grid-template-columns: 1fr; gap: 48px; }
+      .book-banner { height: 36vh; min-height: 260px; }
 
-      footer { padding: 40px 32px; flex-direction: column; text-align: center; }
+      .location { padding: 48px 20px; }
+      .location-grid { grid-template-columns: 1fr; gap: 32px; }
+      .map-wrap { min-height: 280px; }
+      .map-wrap iframe { min-height: 280px; }
 
-      .photo-strip-item { height: 180px; }
+      .instagram-strip { padding: 20px; }
+
+      footer { padding: 28px 20px; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+      .footer-links { justify-content: center; gap: 16px; }
+
+      .photo-strip-item { height: 140px; }
     }
 
+    /* ─── RESPONSIVE — MOBILE ─── */
     @media (max-width: 540px) {
-      .hero { padding: 80px 24px; }
-      .photo-strip { grid-template-columns: 1fr; }
-      .photo-strip-item:not(:first-child) { display: none; }
-      .photo-strip-item { height: 260px; }
-      .team-grid { grid-template-columns: 1fr; }
-      .gallery-editorial { grid-template-columns: 1fr 1fr; }
-      .reviews-content { padding: 24px; }
+      nav { height: 60px; }
+      .mobile-menu { top: 60px; padding: 20px; gap: 16px; }
+
+      .hero { min-height: 100svh; padding: 24px 20px 32px; }
+      .hero-eyebrow { font-size: 10px; margin-bottom: 12px; }
+      .hero h1 { font-size: clamp(2.4rem, 9vw, 3.2rem); margin-bottom: 20px; }
+      .btn-hero { padding: 13px 26px; font-size: 13px; }
+
+      .photo-strip { grid-template-columns: 1fr 1fr; }
+      .photo-strip-item { height: 120px; }
+      .photo-strip-item:last-child { display: none; }
+
+      .about-photo { height: 56vw; }
+      .about-text { padding: 28px 20px; }
+      .about-text h2 { font-size: 1.6rem; }
+      .about-text p { font-size: 14px; }
+      .about-stats { gap: 16px; margin-top: 16px; padding-top: 14px; }
+      .stat strong { font-size: 1.4rem; }
+
+      .services { padding: 40px 16px; }
+      .services-header h2 { font-size: 1.8rem; }
+      .service-col { padding: 18px 16px; }
+      .coming-soon-pill { font-size: 13px; padding: 10px 16px; }
+
+      .gallery { padding: 40px 16px; }
+      .gallery-header h2 { font-size: 1.8rem; }
+      .gallery-editorial {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 130px 130px 130px 130px 130px 130px;
+      }
+
+      .reviews-section { padding: 40px 16px; }
+      .reviews-top blockquote { font-size: 1.1rem; }
+      .review-card { padding: 18px; }
+      .review-text { font-size: 13px; }
+
+      .team { padding: 40px 16px; }
+      .team-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .team-card { padding-top: 12px; }
+      .team-avatar { width: 48px; height: 48px; font-size: 1.1rem; margin-bottom: 8px; }
+      .team-card h3 { font-size: 1rem; }
+      .team-desc { font-size: 12px; }
+
+      .book-banner-content h2 { font-size: 1.6rem; }
+      .book-banner-content p { font-size: 14px; margin-bottom: 16px; }
+      .btn-white { padding: 13px 28px; font-size: 14px; }
+
+      .location { padding: 40px 16px; }
+      .location h2 { font-size: 1.8rem; }
+      .hours-table td { font-size: 13px; padding: 7px 0; }
+      .location-details p { font-size: 13px; }
+
+      footer { padding: 24px 16px; }
+      .footer-links { gap: 12px; }
+      .footer-links a { font-size: 12px; }
     }
   </style>
 </head>
