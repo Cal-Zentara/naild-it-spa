@@ -4,32 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nail'd It! Spa — Stanton, CA</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --blush: #F9EDE8;
       --white: #FFFFFF;
       --terracotta: #C4714F;
       --terracotta-dark: #A05038;
-      --terracotta-light: #E8B49A;
       --gold: #C9A24A;
       --gold-light: #F0E0B0;
-      --text-dark: #2C1A14;
+      --dark: #1A0F0A;
       --text-mid: #6B4A3A;
       --text-light: #A0796A;
       --border: #EDD5C8;
-      --shadow: 0 4px 30px rgba(196,113,79,0.10);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', sans-serif;
       background: var(--white);
-      color: var(--text-dark);
-      line-height: 1.6;
+      color: var(--dark);
+      overflow-x: hidden;
     }
 
     img { display: block; max-width: 100%; }
@@ -39,21 +36,32 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 40px;
-      height: 68px;
+      height: 70px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 0 48px;
+      transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
     }
 
-    .nav-logo img {
-      height: 44px;
-      width: auto;
-      object-fit: contain;
+    nav.scrolled {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom-color: var(--border);
     }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.4s;
+    }
+
+    nav.scrolled .nav-logo { color: var(--dark); }
 
     .nav-links {
       display: flex;
@@ -63,54 +71,60 @@
 
     .nav-links a {
       text-decoration: none;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--text-mid);
-      transition: color 0.2s;
+      color: rgba(255,255,255,0.85);
+      transition: color 0.3s;
     }
 
-    .nav-links a:hover { color: var(--terracotta); }
+    nav.scrolled .nav-links a { color: var(--text-mid); }
+    .nav-links a:hover { color: var(--terracotta) !important; }
 
     .nav-book {
-      background: var(--terracotta);
-      color: white;
+      background: white;
+      color: var(--terracotta);
       padding: 10px 24px;
       border-radius: 99px;
       text-decoration: none;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.05em;
-      transition: background 0.2s;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s;
     }
 
-    .nav-book:hover { background: var(--terracotta-dark); }
+    nav.scrolled .nav-book {
+      background: var(--terracotta);
+      color: white;
+    }
 
     .nav-hamburger {
       display: none;
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
-      padding: 4px;
     }
 
     .nav-hamburger span {
       display: block;
       width: 24px;
       height: 2px;
-      background: var(--text-dark);
+      background: white;
       border-radius: 2px;
-      transition: all 0.3s;
+      transition: background 0.4s;
     }
+
+    nav.scrolled .nav-hamburger span { background: var(--dark); }
 
     .mobile-menu {
       display: none;
       position: fixed;
-      top: 68px; left: 0; right: 0;
+      top: 70px; left: 0; right: 0;
       background: white;
       border-bottom: 1px solid var(--border);
-      padding: 24px 40px;
+      padding: 28px 32px;
       flex-direction: column;
       gap: 20px;
       z-index: 99;
@@ -123,63 +137,60 @@
       font-size: 15px;
       font-weight: 500;
       color: var(--text-mid);
-      letter-spacing: 0.05em;
     }
 
     .mobile-menu .mobile-book {
-      display: inline-block;
       background: var(--terracotta);
       color: white;
-      padding: 12px 28px;
+      padding: 14px 28px;
       border-radius: 99px;
-      font-weight: 600;
       text-align: center;
+      font-weight: 600;
     }
 
     /* ─── HERO ─── */
     .hero {
-      min-height: 100vh;
-      background: var(--blush);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 100px 24px 60px;
       position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 80px 72px;
       overflow: hidden;
     }
 
-    .hero::before {
-      content: '';
+    .hero-bg {
       position: absolute;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,162,74,0.12) 0%, transparent 70%);
-      top: -100px; right: -100px;
-      pointer-events: none;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
 
-    .hero::after {
-      content: '';
+    .hero-overlay {
       position: absolute;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(196,113,79,0.08) 0%, transparent 70%);
-      bottom: -80px; left: -80px;
-      pointer-events: none;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(20, 8, 4, 0.78) 0%,
+        rgba(20, 8, 4, 0.35) 50%,
+        rgba(20, 8, 4, 0.15) 100%
+      );
     }
 
-    .hero-inner {
+    .hero-content {
       position: relative;
       z-index: 1;
       max-width: 700px;
     }
 
     .hero-eyebrow {
-      display: inline-block;
-      font-size: 12px;
+      display: block;
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
       margin-bottom: 20px;
@@ -187,40 +198,308 @@
 
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-size: clamp(3.2rem, 7vw, 6rem);
       font-weight: 700;
-      color: var(--text-dark);
+      color: white;
       line-height: 1.05;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     .hero h1 em {
       font-style: italic;
-      color: var(--terracotta);
-    }
-
-    .hero-sub {
-      font-size: clamp(16px, 2vw, 19px);
-      color: var(--text-mid);
-      font-weight: 300;
-      margin-bottom: 40px;
-      line-height: 1.7;
+      color: var(--terracotta-dark);
+      color: #E8A07A;
     }
 
     .hero-actions {
       display: flex;
-      gap: 16px;
-      justify-content: center;
+      gap: 14px;
+      align-items: center;
       flex-wrap: wrap;
+    }
+
+    .btn-hero {
+      background: var(--terracotta);
+      color: white;
+      padding: 15px 34px;
+      border-radius: 99px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-hero:hover {
+      background: var(--terracotta-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255,255,255,0.4);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-ghost:hover {
+      color: white;
+      border-bottom-color: white;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      right: 72px;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .hero-scroll::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* ─── PHOTO STRIP (3 flush photos) ─── */
+    .photo-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3px;
+      background: var(--dark);
+    }
+
+    .photo-strip-item {
+      height: 280px;
+      overflow: hidden;
+    }
+
+    .photo-strip-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .photo-strip-item:hover img {
+      transform: scale(1.04);
+    }
+
+    /* ─── ABOUT (split screen) ─── */
+    .about {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      min-height: 80vh;
+    }
+
+    .about-photo {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-text {
+      background: var(--blush);
+      padding: 80px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .about-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 28px;
+    }
+
+    .about-text p {
+      font-size: 16px;
+      color: var(--text-mid);
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 40px;
+      padding-top: 36px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      color: var(--terracotta);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: var(--text-light);
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── SERVICES ─── */
+    .services {
+      padding: 100px 72px;
+      background: var(--white);
+    }
+
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 64px;
+    }
+
+    .services-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--dark);
+      max-width: 400px;
+    }
+
+    .services-header p {
+      font-size: 14px;
+      color: var(--text-light);
+      max-width: 280px;
+      text-align: right;
+      line-height: 1.7;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+    }
+
+    .service-col {
+      background: var(--white);
+      padding: 40px 32px;
+    }
+
+    .service-col-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--dark);
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--terracotta);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .service-col.featured {
+      background: var(--dark);
+    }
+
+    .service-col.featured .service-col-title {
+      color: white;
+      border-bottom-color: var(--gold);
+    }
+
+    .service-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(237,213,200,0.5);
+    }
+
+    .service-col.featured .service-row {
+      border-bottom-color: rgba(255,255,255,0.08);
+    }
+
+    .service-row:last-child { border-bottom: none; }
+
+    .service-name {
+      font-size: 14px;
+      color: var(--text-mid);
+    }
+
+    .service-col.featured .service-name { color: rgba(255,255,255,0.7); }
+
+    .service-price {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--terracotta);
+    }
+
+    .service-col.featured .service-price { color: var(--gold-light); }
+
+    .services-footer {
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .coming-soon-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--blush);
+      border: 1px dashed var(--gold);
+      border-radius: 99px;
+      padding: 12px 24px;
+      font-size: 14px;
+      color: var(--text-mid);
+    }
+
+    .coming-soon-pill .cs-badge {
+      background: var(--gold);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 99px;
     }
 
     .btn-primary {
       background: var(--terracotta);
       color: white;
-      padding: 16px 36px;
+      padding: 14px 32px;
       border-radius: 99px;
       text-decoration: none;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
       transition: background 0.2s, transform 0.15s;
       display: inline-block;
@@ -228,308 +507,75 @@
 
     .btn-primary:hover {
       background: var(--terracotta-dark);
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
 
-    .btn-outline {
-      background: transparent;
-      color: var(--text-dark);
-      padding: 16px 36px;
-      border-radius: 99px;
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 500;
-      border: 1.5px solid var(--border);
-      transition: border-color 0.2s, transform 0.15s;
-      display: inline-block;
-    }
-
-    .btn-outline:hover {
-      border-color: var(--terracotta);
-      color: var(--terracotta);
-      transform: translateY(-2px);
-    }
-
-    .hero-badges {
-      margin-top: 56px;
-      display: flex;
-      gap: 32px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      text-align: center;
-    }
-
-    .badge-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--terracotta);
-    }
-
-    .badge-label {
-      font-size: 12px;
-      color: var(--text-light);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .badge-divider {
-      width: 1px;
-      background: var(--border);
-      align-self: stretch;
-    }
-
-    /* ─── SECTION LAYOUT ─── */
-    section {
-      padding: 96px 24px;
-    }
-
-    .section-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      display: block;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      color: var(--text-dark);
-      line-height: 1.15;
-      margin-bottom: 16px;
-    }
-
-    .section-desc {
-      color: var(--text-mid);
-      font-size: 16px;
-      max-width: 540px;
-      line-height: 1.7;
-    }
-
-    .section-header {
-      margin-bottom: 56px;
-    }
-
-    .section-header.centered {
-      text-align: center;
-    }
-
-    .section-header.centered .section-desc {
-      margin: 0 auto;
-    }
-
-    /* ─── ABOUT ─── */
-    #about {
-      background: var(--white);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .about-image {
-      position: relative;
-    }
-
-    .about-image img {
-      width: 100%;
-      aspect-ratio: 4/5;
-      object-fit: cover;
-      border-radius: 16px;
-    }
-
-    .about-image-accent {
-      position: absolute;
-      bottom: -20px;
-      right: -20px;
-      width: 120px;
-      height: 120px;
-      background: var(--gold-light);
-      border-radius: 12px;
-      z-index: -1;
-    }
-
-    .about-text .section-label { margin-bottom: 12px; }
-
-    .about-text .section-title { margin-bottom: 24px; }
-
-    .about-text p {
-      color: var(--text-mid);
-      font-size: 16px;
-      line-height: 1.85;
-      margin-bottom: 16px;
-    }
-
-    .about-detail {
-      display: flex;
-      gap: 32px;
-      margin-top: 36px;
-      padding-top: 36px;
-      border-top: 1px solid var(--border);
-    }
-
-    .about-detail-item strong {
-      display: block;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: var(--terracotta);
-    }
-
-    .about-detail-item span {
-      font-size: 13px;
-      color: var(--text-light);
-    }
-
-    /* ─── SERVICES ─── */
-    #services {
+    /* ─── GALLERY (editorial) ─── */
+    .gallery {
+      padding: 100px 72px;
       background: var(--blush);
     }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 56px;
     }
 
-    .service-card {
-      background: var(--white);
-      border-radius: 14px;
-      padding: 28px;
-      box-shadow: var(--shadow);
-    }
-
-    .service-card-title {
+    .gallery-header h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      color: var(--text-dark);
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: var(--dark);
+      margin-bottom: 12px;
     }
 
-    .service-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 8px;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(237,213,200,0.5);
-    }
-
-    .service-item:last-child { border-bottom: none; }
-
-    .service-name {
-      font-size: 14px;
-      color: var(--text-mid);
-    }
-
-    .service-price {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--terracotta);
-      white-space: nowrap;
-    }
-
-    .service-featured {
-      background: linear-gradient(135deg, var(--terracotta) 0%, var(--terracotta-dark) 100%);
-      color: white;
-    }
-
-    .service-featured .service-card-title {
-      color: white;
-      border-bottom-color: rgba(255,255,255,0.2);
-    }
-
-    .service-featured .service-name { color: rgba(255,255,255,0.85); }
-
-    .service-featured .service-price { color: var(--gold-light); }
-
-    .service-featured .service-item { border-bottom-color: rgba(255,255,255,0.15); }
-
-    .coming-soon-card {
-      background: var(--white);
-      border-radius: 14px;
-      padding: 28px;
-      border: 1.5px dashed var(--gold);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .coming-soon-tag {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: var(--gold-light);
-      padding: 4px 10px;
-      border-radius: 99px;
-    }
-
-    .coming-soon-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      color: var(--text-dark);
-    }
-
-    .coming-soon-card p {
-      font-size: 14px;
+    .gallery-header p {
+      font-size: 15px;
       color: var(--text-light);
     }
 
-    /* ─── GALLERY ─── */
-    #gallery {
-      background: var(--white);
+    .gallery-editorial {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 320px 220px 300px 260px 280px;
+      gap: 4px;
     }
 
-    .gallery-grid {
-      columns: 3;
-      column-gap: 16px;
-    }
-
-    .gallery-item {
-      break-inside: avoid;
-      margin-bottom: 16px;
-      border-radius: 12px;
+    .g-item {
       overflow: hidden;
       cursor: pointer;
-      position: relative;
+      background: var(--border);
     }
 
-    .gallery-item img {
+    .g-item img {
       width: 100%;
-      display: block;
-      transition: transform 0.4s ease;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
     }
 
-    .gallery-item:hover img {
-      transform: scale(1.04);
-    }
+    .g-item:hover img { transform: scale(1.05); }
+
+    /* Explicit grid placement */
+    .g1 { grid-column: 1; grid-row: 1 / 3; }
+    .g2 { grid-column: 2; grid-row: 1; }
+    .g3 { grid-column: 3; grid-row: 1; }
+    .g4 { grid-column: 2 / 4; grid-row: 2; }
+    .g5 { grid-column: 1; grid-row: 3; }
+    .g6 { grid-column: 2; grid-row: 3; }
+    .g7 { grid-column: 3; grid-row: 3; }
+    .g8 { grid-column: 1 / 3; grid-row: 4; }
+    .g9 { grid-column: 3; grid-row: 4; }
+    .g10 { grid-column: 1; grid-row: 5; }
+    .g11 { grid-column: 2; grid-row: 5; }
+    .g12 { grid-column: 3; grid-row: 5; }
 
     /* Lightbox */
     .lightbox {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.9);
-      z-index: 200;
+      background: rgba(0,0,0,0.92);
+      z-index: 300;
       align-items: center;
       justify-content: center;
       padding: 20px;
@@ -540,290 +586,212 @@
     .lightbox img {
       max-height: 90vh;
       max-width: 90vw;
-      border-radius: 8px;
       object-fit: contain;
     }
 
     .lightbox-close {
       position: absolute;
       top: 20px; right: 28px;
-      color: white;
-      font-size: 32px;
+      color: rgba(255,255,255,0.7);
+      font-size: 36px;
       cursor: pointer;
       line-height: 1;
-      opacity: 0.8;
     }
 
-    .lightbox-close:hover { opacity: 1; }
+    .lightbox-close:hover { color: white; }
+
+    /* ─── REVIEWS (photo bg) ─── */
+    .reviews-section {
+      position: relative;
+      height: 70vh;
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .reviews-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .reviews-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(20, 8, 4, 0.72);
+    }
+
+    .reviews-content {
+      position: relative;
+      z-index: 1;
+      padding: 48px;
+      max-width: 750px;
+    }
+
+    .reviews-content .eyebrow { color: var(--gold); margin-bottom: 24px; }
+
+    blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 3vw, 2.1rem);
+      font-style: italic;
+      color: white;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .reviews-ratings {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    .rating-item {
+      color: rgba(255,255,255,0.9);
+      font-size: 14px;
+    }
+
+    .rating-item strong {
+      display: block;
+      font-size: 1.6rem;
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      margin-bottom: 2px;
+    }
+
+    .btn-reviews {
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 13px;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-reviews:hover {
+      color: white;
+      border-color: white;
+    }
 
     /* ─── TEAM ─── */
-    #team {
-      background: var(--blush);
+    .team {
+      padding: 100px 72px;
+      background: var(--white);
+    }
+
+    .team-header {
+      margin-bottom: 56px;
+    }
+
+    .team-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .team-header p {
+      font-size: 15px;
+      color: var(--text-light);
     }
 
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
     }
 
     .team-card {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 32px 24px;
-      text-align: center;
-      box-shadow: var(--shadow);
+      border-top: 2px solid var(--border);
+      padding-top: 24px;
+    }
+
+    .team-card.owner {
+      border-top-color: var(--terracotta);
     }
 
     .team-avatar {
-      width: 80px;
-      height: 80px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--terracotta-light), var(--gold-light));
+      background: var(--blush);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 20px;
       font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: var(--terracotta-dark);
+      font-size: 1.5rem;
+      color: var(--terracotta);
+      margin-bottom: 16px;
     }
 
     .team-card h3 {
       font-family: 'Playfair Display', serif;
       font-size: 1.2rem;
-      color: var(--text-dark);
+      color: var(--dark);
       margin-bottom: 4px;
     }
 
     .team-role {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--gold);
-      font-weight: 500;
-      letter-spacing: 0.05em;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       margin-bottom: 12px;
     }
 
     .team-desc {
       font-size: 14px;
       color: var(--text-light);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
-    /* ─── REVIEWS ─── */
-    #reviews {
-      background: var(--white);
-    }
-
-    .reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .review-card {
-      background: var(--blush);
-      border-radius: 14px;
-      padding: 28px;
-    }
-
-    .review-stars {
-      color: var(--gold);
-      font-size: 16px;
-      letter-spacing: 2px;
-      margin-bottom: 14px;
-    }
-
-    .review-text {
-      font-size: 15px;
-      color: var(--text-mid);
-      line-height: 1.75;
-      font-style: italic;
-      margin-bottom: 20px;
-    }
-
-    .review-author {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-dark);
-    }
-
-    .review-source {
-      font-size: 12px;
-      color: var(--text-light);
-    }
-
-    .reviews-cta {
-      text-align: center;
-      margin-top: 48px;
-    }
-
-    .reviews-cta p {
-      color: var(--text-light);
-      font-size: 14px;
-      margin-bottom: 16px;
-    }
-
-    /* ─── LOCATION ─── */
-    #location {
-      background: var(--blush);
-    }
-
-    .location-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: start;
-    }
-
-    .hours-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .hours-table tr {
-      border-bottom: 1px solid var(--border);
-    }
-
-    .hours-table tr:last-child { border-bottom: none; }
-
-    .hours-table td {
-      padding: 12px 0;
-      font-size: 15px;
-    }
-
-    .hours-table td:first-child {
-      color: var(--text-mid);
-      font-weight: 500;
-    }
-
-    .hours-table td:last-child {
-      color: var(--text-dark);
-      text-align: right;
-    }
-
-    .location-info {
-      margin-top: 32px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-    }
-
-    .location-info p {
-      font-size: 15px;
-      color: var(--text-mid);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .location-info p span.icon {
-      color: var(--terracotta);
-      font-size: 16px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .map-embed {
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .map-embed iframe {
-      width: 100%;
-      height: 360px;
-      border: none;
-      display: block;
-    }
-
-    /* ─── INSTAGRAM ─── */
-    .instagram-strip {
-      background: var(--white);
-      padding: 48px 24px;
-      text-align: center;
-      border-top: 1px solid var(--border);
-    }
-
-    .instagram-strip p {
-      font-size: 15px;
-      color: var(--text-light);
-      margin-bottom: 12px;
-    }
-
-    .instagram-handle {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      color: var(--text-dark);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .instagram-handle:hover { color: var(--terracotta); }
-
-    /* ─── FOOTER ─── */
-    footer {
-      background: var(--text-dark);
-      color: rgba(255,255,255,0.6);
-      padding: 48px 24px;
-      text-align: center;
-    }
-
-    .footer-inner {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: white;
-      margin-bottom: 16px;
-    }
-
-    .footer-tagline {
-      font-size: 14px;
-      margin-bottom: 32px;
-      line-height: 1.6;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin-bottom: 32px;
-    }
-
-    .footer-links a {
-      color: rgba(255,255,255,0.5);
-      text-decoration: none;
-      font-size: 13px;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: var(--terracotta-light); }
-
-    .footer-copy {
-      font-size: 12px;
-      opacity: 0.4;
-    }
-
-    /* ─── BOOK CTA BANNER ─── */
+    /* ─── BOOK BANNER (full photo) ─── */
     .book-banner {
-      background: linear-gradient(135deg, var(--terracotta) 0%, var(--terracotta-dark) 100%);
-      padding: 72px 24px;
+      position: relative;
+      height: 60vh;
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      overflow: hidden;
     }
 
-    .book-banner h2 {
+    .book-banner-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .book-banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(196,113,79,0.88), rgba(160,80,56,0.92));
+    }
+
+    .book-banner-content {
+      position: relative;
+      z-index: 1;
+      padding: 40px;
+    }
+
+    .book-banner-content h2 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-size: clamp(2rem, 5vw, 3.5rem);
       color: white;
       margin-bottom: 12px;
     }
 
-    .book-banner p {
+    .book-banner-content p {
       color: rgba(255,255,255,0.75);
       font-size: 16px;
       margin-bottom: 36px;
@@ -836,22 +804,147 @@
       border-radius: 99px;
       text-decoration: none;
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 700;
       display: inline-block;
       transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.2);
     }
 
     .btn-white:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.25);
     }
+
+    /* ─── LOCATION ─── */
+    .location {
+      padding: 100px 72px;
+      background: var(--blush);
+    }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .location h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .location-sub {
+      font-size: 15px;
+      color: var(--text-light);
+      margin-bottom: 48px;
+    }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+    }
+
+    .hours-table tr { border-bottom: 1px solid var(--border); }
+    .hours-table tr:last-child { border-bottom: none; }
+
+    .hours-table td {
+      padding: 13px 0;
+      font-size: 15px;
+    }
+
+    .hours-table td:first-child { color: var(--text-mid); font-weight: 500; }
+    .hours-table td:last-child { text-align: right; color: var(--dark); }
+
+    .location-details p {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--text-mid);
+      margin-bottom: 10px;
+    }
+
+    .location-details p .icon { color: var(--terracotta); flex-shrink: 0; }
+
+    .map-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(196,113,79,0.15);
+      height: 100%;
+      min-height: 380px;
+    }
+
+    .map-wrap iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 380px;
+      border: none;
+      display: block;
+    }
+
+    /* ─── INSTAGRAM STRIP ─── */
+    .instagram-strip {
+      background: var(--white);
+      padding: 40px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .instagram-strip p { font-size: 13px; color: var(--text-light); margin-bottom: 8px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    .instagram-handle {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--dark);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .instagram-handle:hover { color: var(--terracotta); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.45);
+      padding: 56px 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: white;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--terracotta-dark); color: #E8A07A; }
+
+    .footer-copy { font-size: 12px; }
 
     /* ─── SCROLL ANIMATIONS ─── */
     .fade-up {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
     .fade-up.visible {
@@ -860,27 +953,62 @@
     }
 
     /* ─── RESPONSIVE ─── */
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; }
+    @media (max-width: 960px) {
+      nav { padding: 0 24px; }
       .nav-links { display: none; }
       .nav-book { display: none; }
       .nav-hamburger { display: flex; }
 
-      .about-grid { grid-template-columns: 1fr; gap: 40px; }
-      .about-image { order: -1; }
-      .about-image img { aspect-ratio: 3/2; }
+      .hero { padding: 80px 32px; }
+      .hero-scroll { right: 32px; }
 
-      .gallery-grid { columns: 2; }
+      .about { grid-template-columns: 1fr; }
+      .about-photo { height: 50vw; min-height: 280px; }
+      .about-text { padding: 56px 32px; }
+      .about-stats { flex-wrap: wrap; gap: 24px; }
 
-      .location-grid { grid-template-columns: 1fr; gap: 40px; }
+      .services { padding: 72px 32px; }
+      .services-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .services-header p { text-align: left; }
+      .services-grid { grid-template-columns: 1fr; }
 
-      section { padding: 64px 20px; }
+      .gallery { padding: 72px 32px; }
+      .gallery-editorial {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 220px 220px 220px 220px 220px 220px;
+      }
+      .g1 { grid-column: 1; grid-row: 1; }
+      .g2 { grid-column: 2; grid-row: 1; }
+      .g3 { grid-column: 1; grid-row: 2; }
+      .g4 { grid-column: 2; grid-row: 2; }
+      .g5 { grid-column: 1; grid-row: 3; }
+      .g6 { grid-column: 2; grid-row: 3; }
+      .g7 { grid-column: 1; grid-row: 4; }
+      .g8 { grid-column: 2; grid-row: 4; }
+      .g9 { grid-column: 1; grid-row: 5; }
+      .g10 { grid-column: 2; grid-row: 5; }
+      .g11 { grid-column: 1; grid-row: 6; }
+      .g12 { grid-column: 2; grid-row: 6; }
+
+      .team { padding: 72px 32px; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+
+      .location { padding: 72px 32px; }
+      .location-grid { grid-template-columns: 1fr; gap: 48px; }
+
+      footer { padding: 40px 32px; flex-direction: column; text-align: center; }
+
+      .photo-strip-item { height: 180px; }
     }
 
-    @media (max-width: 480px) {
-      .gallery-grid { columns: 2; }
-      .hero-badges { gap: 20px; }
-      .badge-divider { display: none; }
+    @media (max-width: 540px) {
+      .hero { padding: 80px 24px; }
+      .photo-strip { grid-template-columns: 1fr; }
+      .photo-strip-item:not(:first-child) { display: none; }
+      .photo-strip-item { height: 260px; }
+      .team-grid { grid-template-columns: 1fr; }
+      .gallery-editorial { grid-template-columns: 1fr 1fr; }
+      .reviews-content { padding: 24px; }
     }
   </style>
 </head>
@@ -888,15 +1016,13 @@
 
 <!-- NAV -->
 <nav id="main-nav">
-  <a class="nav-logo" href="#">
-    <img src="logo/Logo.jpeg" alt="Nail'd It! Spa" />
-  </a>
+  <a class="nav-logo" href="#">Nail'd It! Spa</a>
   <ul class="nav-links">
-    <li><a href="#about">Our Story</a></li>
+    <li><a href="#about">Story</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#team">Team</a></li>
-    <li><a href="#location">Visit Us</a></li>
+    <li><a href="#location">Visit</a></li>
   </ul>
   <a class="nav-book" href="http://fresha.com/b/Pgl0k" target="_blank">Book Now</a>
   <div class="nav-hamburger" onclick="toggleMenu()">
@@ -914,226 +1040,201 @@
 </div>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <span class="hero-eyebrow">Stanton, California</span>
-    <h1>Where every visit<br/>feels like <em>love.</em></h1>
-    <p class="hero-sub">Premium nail care, lasting results, and a team that treats you like family.</p>
+<div class="hero">
+  <img class="hero-bg" src="photos/IMG_1898.jpeg" alt="Nail'd It! Spa" />
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Stanton, California &nbsp;·&nbsp; Est. 5+ Years</span>
+    <h1>Where every<br/>visit feels<br/>like <em>love.</em></h1>
     <div class="hero-actions">
-      <a href="http://fresha.com/b/Pgl0k" target="_blank" class="btn-primary">Book Your Appointment</a>
-      <a href="#services" class="btn-outline">View Services</a>
-    </div>
-    <div class="hero-badges">
-      <div class="badge">
-        <div class="badge-num">4.5★</div>
-        <div class="badge-label">Yelp Rating</div>
-      </div>
-      <div class="badge-divider"></div>
-      <div class="badge">
-        <div class="badge-num">5.0★</div>
-        <div class="badge-label">Fresha Rating</div>
-      </div>
-      <div class="badge-divider"></div>
-      <div class="badge">
-        <div class="badge-num">5–10</div>
-        <div class="badge-label">Years Open</div>
-      </div>
-      <div class="badge-divider"></div>
-      <div class="badge">
-        <div class="badge-num">400+</div>
-        <div class="badge-label">Happy Clients</div>
-      </div>
+      <a href="http://fresha.com/b/Pgl0k" target="_blank" class="btn-hero">Book Your Appointment</a>
+      <a href="#gallery" class="btn-ghost">See Our Work</a>
     </div>
   </div>
-</section>
+  <div class="hero-scroll">Scroll to explore</div>
+</div>
+
+<!-- PHOTO STRIP -->
+<div class="photo-strip">
+  <div class="photo-strip-item">
+    <img src="photos/IMG_0931.jpeg" alt="Nail art" loading="lazy" />
+  </div>
+  <div class="photo-strip-item">
+    <img src="photos/IMG_1261.png" alt="Nail art" loading="lazy" />
+  </div>
+  <div class="photo-strip-item">
+    <img src="photos/IMG_0880.jpeg" alt="Nail art" loading="lazy" />
+  </div>
+</div>
 
 <!-- ABOUT -->
-<section id="about">
-  <div class="section-inner">
-    <div class="about-grid">
-      <div class="about-image fade-up">
-        <img src="photos/IMG_1921.jpeg" alt="Nail'd It! Spa" />
-        <div class="about-image-accent"></div>
+<div class="about" id="about">
+  <div class="about-photo fade-up">
+    <img src="photos/IMG_1921.jpeg" alt="Nail'd It! Spa" />
+  </div>
+  <div class="about-text fade-up">
+    <span class="eyebrow">Our Story</span>
+    <h2>It started long before the salon.</h2>
+    <p>Before Nail'd It! Spa, there was a kitchen table and a mother who made every client feel beautiful. That's where Dalena learned — and that's the standard she's kept ever since.</p>
+    <p>Today, that same love and attention lives in every service we offer. We don't just do nails — we create an experience that leaves you feeling cared for, confident, and ready to show off.</p>
+    <p>Longer-lasting results, honest pricing, and a team that genuinely loves what they do.</p>
+    <div class="about-stats">
+      <div class="stat">
+        <strong>4.5★</strong>
+        <span>Yelp Rating</span>
       </div>
-      <div class="about-text fade-up">
-        <span class="section-label">Our Story</span>
-        <h2 class="section-title">It started long before the salon.</h2>
-        <p>Before Nail'd It! Spa, there was a kitchen table and a mother who made every client feel beautiful. That's where Dalena learned — and that's the standard she's kept ever since.</p>
-        <p>Today, that same love and attention lives in every service we offer. We don't just do nails — we create an experience that leaves you feeling cared for, confident, and ready to show off.</p>
-        <p>Longer-lasting results, honest pricing, and a team that genuinely loves what they do. That's what Nail'd It! Spa is built on.</p>
-        <div class="about-detail">
-          <div class="about-detail-item">
-            <strong>Gel-X</strong>
-            <span>Our Specialty</span>
-          </div>
-          <div class="about-detail-item">
-            <strong>Stanton</strong>
-            <span>7443 Cerritos Ave</span>
-          </div>
-          <div class="about-detail-item">
-            <strong>Walk-ins</strong>
-            <span>Welcome</span>
-          </div>
-        </div>
+      <div class="stat">
+        <strong>5.0★</strong>
+        <span>Fresha Rating</span>
+      </div>
+      <div class="stat">
+        <strong>5+ yrs</strong>
+        <span>In Business</span>
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- SERVICES -->
-<section id="services">
-  <div class="section-inner">
-    <div class="section-header centered fade-up">
-      <span class="section-label">What We Offer</span>
-      <h2 class="section-title">Services & Pricing</h2>
-      <p class="section-desc">Full-service nail care at honest prices. Every service done with care, every time.</p>
+<section class="services" id="services">
+  <div class="services-header fade-up">
+    <div>
+      <span class="eyebrow" style="color:var(--gold)">What We Offer</span>
+      <h2>Services &<br/>Pricing</h2>
     </div>
-    <div class="services-grid">
+    <p>Full-service nail care at honest prices. Every service done with care, every time. Walk-ins welcome.</p>
+  </div>
+  <div class="services-grid fade-up">
 
-      <!-- Manicures - Featured -->
-      <div class="service-card service-featured fade-up">
-        <div class="service-card-title">✦ Manicures</div>
-        <div class="service-item">
-          <span class="service-name">Basic Manicure</span>
-          <span class="service-price">from $20</span>
-        </div>
-        <div class="service-item">
-          <span class="service-name">Gel Manicure</span>
-          <span class="service-price">$30</span>
-        </div>
-        <div class="service-item">
-          <span class="service-name">Gel Overlay / Builder</span>
-          <span class="service-price">from $45</span>
-        </div>
-        <div class="service-item">
-          <span class="service-name">Gel-X</span>
-          <span class="service-price">from $50</span>
-        </div>
-        <div class="service-item">
-          <span class="service-name">Acrylic</span>
-          <span class="service-price">from $40</span>
-        </div>
-        <div class="service-item">
-          <span class="service-name">SNS Dip Powder</span>
-          <span class="service-price">from $40</span>
-        </div>
+    <div class="service-col featured">
+      <div class="service-col-title">✦ Manicures</div>
+      <div class="service-row">
+        <span class="service-name">Basic Manicure</span>
+        <span class="service-price">from $20</span>
       </div>
-
-      <!-- Pedicures -->
-      <div class="service-card fade-up">
-        <div class="service-card-title">Pedicures</div>
-        <div class="service-item">
-          <span class="service-name">Spa Pedicure</span>
-          <span class="service-price">from $25</span>
-        </div>
-        <div class="service-item">
-          <span class="service-name">Happy Pedicure</span>
-          <span class="service-price">from $32</span>
-        </div>
-        <div class="service-item">
-          <span class="service-name">Classic Gel Pedicure</span>
-          <span class="service-price">from $37</span>
-        </div>
-        <div class="service-item">
-          <span class="service-name">Gel Pedicure + French Tip</span>
-          <span class="service-price">from $42</span>
-        </div>
-        <div class="service-item">
-          <span class="service-name">Regular Pedicure</span>
-          <span class="service-price">$25</span>
-        </div>
+      <div class="service-row">
+        <span class="service-name">Gel Manicure</span>
+        <span class="service-price">$30</span>
       </div>
-
-      <!-- Packages -->
-      <div class="service-card fade-up">
-        <div class="service-card-title">Packages & Add-Ons</div>
-        <div class="service-item">
-          <span class="service-name">VIP Mani-Pedi Package</span>
-          <span class="service-price">$90</span>
-        </div>
-        <div class="service-item">
-          <span class="service-name">Nail Art</span>
-          <span class="service-price">varies</span>
-        </div>
-        <div class="service-item">
-          <span class="service-name">Nail Removal</span>
-          <span class="service-price">from $12</span>
-        </div>
-        <div class="service-item">
-          <span class="service-name">Nail Repair</span>
-          <span class="service-price">from $5</span>
-        </div>
-        <div class="service-item">
-          <span class="service-name">Facial Waxing</span>
-          <span class="service-price">from $8</span>
-        </div>
+      <div class="service-row">
+        <span class="service-name">Gel Overlay / Builder</span>
+        <span class="service-price">from $45</span>
       </div>
-
-      <!-- Coming Soon -->
-      <div class="coming-soon-card fade-up">
-        <span class="coming-soon-tag">Coming Soon</span>
-        <h3>Facial Services</h3>
-        <p>We're expanding. Full facial treatments coming end of 2026.</p>
+      <div class="service-row">
+        <span class="service-name">Gel-X</span>
+        <span class="service-price">from $50</span>
       </div>
-
+      <div class="service-row">
+        <span class="service-name">Acrylic</span>
+        <span class="service-price">from $40</span>
+      </div>
+      <div class="service-row">
+        <span class="service-name">SNS Dip Powder</span>
+        <span class="service-price">from $40</span>
+      </div>
     </div>
+
+    <div class="service-col">
+      <div class="service-col-title">Pedicures</div>
+      <div class="service-row">
+        <span class="service-name">Spa Pedicure</span>
+        <span class="service-price">from $25</span>
+      </div>
+      <div class="service-row">
+        <span class="service-name">Happy Pedicure</span>
+        <span class="service-price">from $32</span>
+      </div>
+      <div class="service-row">
+        <span class="service-name">Classic Gel Pedicure</span>
+        <span class="service-price">from $37</span>
+      </div>
+      <div class="service-row">
+        <span class="service-name">Gel + French Tip</span>
+        <span class="service-price">from $42</span>
+      </div>
+      <div class="service-row">
+        <span class="service-name">Regular Pedicure</span>
+        <span class="service-price">$25</span>
+      </div>
+    </div>
+
+    <div class="service-col">
+      <div class="service-col-title">Packages & Add-Ons</div>
+      <div class="service-row">
+        <span class="service-name">VIP Mani-Pedi Package</span>
+        <span class="service-price">$90</span>
+      </div>
+      <div class="service-row">
+        <span class="service-name">Nail Art</span>
+        <span class="service-price">varies</span>
+      </div>
+      <div class="service-row">
+        <span class="service-name">Nail Removal</span>
+        <span class="service-price">from $12</span>
+      </div>
+      <div class="service-row">
+        <span class="service-name">Nail Repair</span>
+        <span class="service-price">from $5</span>
+      </div>
+      <div class="service-row">
+        <span class="service-name">Facial Waxing</span>
+        <span class="service-price">from $8</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="services-footer fade-up">
+    <div class="coming-soon-pill">
+      <span class="cs-badge">Coming Soon</span>
+      Facial Services — End of 2026
+    </div>
+    <a href="http://fresha.com/b/Pgl0k" target="_blank" class="btn-primary">Book Now</a>
   </div>
 </section>
 
 <!-- GALLERY -->
-<section id="gallery">
-  <div class="section-inner">
-    <div class="section-header centered fade-up">
-      <span class="section-label">Our Work</span>
-      <h2 class="section-title">The Gallery</h2>
-      <p class="section-desc">Every set is a work of art. Browse our latest work below.</p>
+<section class="gallery" id="gallery">
+  <div class="gallery-header fade-up">
+    <span class="eyebrow" style="color:var(--gold)">The Work</span>
+    <h2>Every set, a work of art.</h2>
+    <p>Click any photo to expand.</p>
+  </div>
+  <div class="gallery-editorial fade-up">
+    <div class="g-item g1" onclick="openLightbox(this)">
+      <img src="photos/IMG_5835.jpeg" alt="Nail art" loading="lazy" />
     </div>
-    <div class="gallery-grid">
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="photos/IMG_5835.jpeg" alt="Nail art by Nail'd It! Spa" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="photos/IMG_5497.jpeg" alt="Nail art by Nail'd It! Spa" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="photos/8BA25184-5DBF-4AB8-A4A2-52C29769EF4C.jpeg" alt="Nail art by Nail'd It! Spa" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="photos/IMG_0144.jpeg" alt="Nail art by Nail'd It! Spa" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="photos/IMG_0260.jpeg" alt="Nail art by Nail'd It! Spa" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="photos/IMG_0880.jpeg" alt="Nail art by Nail'd It! Spa" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="photos/IMG_0931.jpeg" alt="Nail art by Nail'd It! Spa" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="photos/IMG_0932.webp" alt="Nail art by Nail'd It! Spa" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="photos/IMG_0947.jpeg" alt="Nail art by Nail'd It! Spa" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="photos/IMG_1103.jpeg" alt="Nail art by Nail'd It! Spa" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="photos/IMG_1261.png" alt="Nail art by Nail'd It! Spa" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="photos/IMG_1898.jpeg" alt="Nail art by Nail'd It! Spa" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="photos/IMG_1909.jpeg" alt="Nail art by Nail'd It! Spa" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="photos/IMG_1921.jpeg" alt="Nail art by Nail'd It! Spa" loading="lazy" />
-      </div>
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="photos/IMG_9234.jpeg" alt="Nail art by Nail'd It! Spa" loading="lazy" />
-      </div>
+    <div class="g-item g2" onclick="openLightbox(this)">
+      <img src="photos/IMG_5497.jpeg" alt="Nail art" loading="lazy" />
+    </div>
+    <div class="g-item g3" onclick="openLightbox(this)">
+      <img src="photos/IMG_0144.jpeg" alt="Nail art" loading="lazy" />
+    </div>
+    <div class="g-item g4" onclick="openLightbox(this)">
+      <img src="photos/IMG_0260.jpeg" alt="Nail art" loading="lazy" />
+    </div>
+    <div class="g-item g5" onclick="openLightbox(this)">
+      <img src="photos/IMG_0947.jpeg" alt="Nail art" loading="lazy" />
+    </div>
+    <div class="g-item g6" onclick="openLightbox(this)">
+      <img src="photos/IMG_1103.jpeg" alt="Nail art" loading="lazy" />
+    </div>
+    <div class="g-item g7" onclick="openLightbox(this)">
+      <img src="photos/8BA25184-5DBF-4AB8-A4A2-52C29769EF4C.jpeg" alt="Nail art" loading="lazy" />
+    </div>
+    <div class="g-item g8" onclick="openLightbox(this)">
+      <img src="photos/IMG_0932.webp" alt="Nail art" loading="lazy" />
+    </div>
+    <div class="g-item g9" onclick="openLightbox(this)">
+      <img src="photos/IMG_1909.jpeg" alt="Nail art" loading="lazy" />
+    </div>
+    <div class="g-item g10" onclick="openLightbox(this)">
+      <img src="photos/IMG_9234.jpeg" alt="Nail art" loading="lazy" />
+    </div>
+    <div class="g-item g11" onclick="openLightbox(this)">
+      <img src="photos/IMG_0931.jpeg" alt="Nail art" loading="lazy" />
+    </div>
+    <div class="g-item g12" onclick="openLightbox(this)">
+      <img src="photos/IMG_1898.jpeg" alt="Nail art" loading="lazy" />
     </div>
   </div>
 </section>
@@ -1144,124 +1245,99 @@
   <img id="lightbox-img" src="" alt="" />
 </div>
 
+<!-- REVIEWS (photo bg) -->
+<div class="reviews-section">
+  <img class="reviews-bg" src="photos/IMG_1261.png" alt="" />
+  <div class="reviews-overlay"></div>
+  <div class="reviews-content fade-up">
+    <span class="eyebrow">What Clients Say</span>
+    <blockquote>"I always leave feeling like a new person. My Gel-X lasts for weeks and the team makes you feel so welcomed every single time."</blockquote>
+    <div class="reviews-ratings">
+      <div class="rating-item">
+        <strong>4.5★</strong>
+        229+ Reviews on Yelp
+      </div>
+      <div class="rating-item">
+        <strong>5.0★</strong>
+        185+ Reviews on Fresha
+      </div>
+    </div>
+    <a href="https://www.yelp.com/biz/naild-it-spa-stanton" target="_blank" class="btn-reviews">Read all reviews on Yelp →</a>
+  </div>
+</div>
+
 <!-- TEAM -->
-<section id="team">
-  <div class="section-inner">
-    <div class="section-header centered fade-up">
-      <span class="section-label">Meet the Team</span>
-      <h2 class="section-title">The hands behind the art.</h2>
-      <p class="section-desc">Our nail techs are passionate, skilled, and genuinely love what they do.</p>
+<section class="team" id="team">
+  <div class="team-header fade-up">
+    <span class="eyebrow" style="color:var(--gold)">Meet the Team</span>
+    <h2>The hands behind the art.</h2>
+    <p>Our nail techs are passionate, skilled, and love what they do.</p>
+  </div>
+  <div class="team-grid">
+    <div class="team-card owner fade-up">
+      <div class="team-avatar">D</div>
+      <h3>Dalena</h3>
+      <div class="team-role">Owner & Nail Artist</div>
+      <p class="team-desc">Started Nail'd It! Spa with a simple belief — every client deserves to leave feeling loved.</p>
     </div>
-    <div class="team-grid">
-      <div class="team-card fade-up">
-        <div class="team-avatar">D</div>
-        <h3>Dalena</h3>
-        <div class="team-role">Owner & Nail Artist</div>
-        <p class="team-desc">Started Nail'd It! Spa with a simple belief: every client deserves to leave feeling loved.</p>
-      </div>
-      <div class="team-card fade-up">
-        <div class="team-avatar">T</div>
-        <h3>Twee</h3>
-        <div class="team-role">Nail Artist</div>
-        <p class="team-desc">Known for intricate nail art and attention to detail on every single set.</p>
-      </div>
-      <div class="team-card fade-up">
-        <div class="team-avatar">N</div>
-        <h3>Nancy</h3>
-        <div class="team-role">Nail Artist</div>
-        <p class="team-desc">Specializes in Gel-X and clean, elegant sets that last.</p>
-      </div>
-      <div class="team-card fade-up">
-        <div class="team-avatar">M</div>
-        <h3>Mindy</h3>
-        <div class="team-role">Nail Artist</div>
-        <p class="team-desc">A client favorite for pedicures, SNS, and making every visit feel relaxing.</p>
-      </div>
+    <div class="team-card fade-up">
+      <div class="team-avatar">T</div>
+      <h3>Twee</h3>
+      <div class="team-role">Nail Artist</div>
+      <p class="team-desc">Known for intricate nail art and attention to detail on every single set.</p>
+    </div>
+    <div class="team-card fade-up">
+      <div class="team-avatar">N</div>
+      <h3>Nancy</h3>
+      <div class="team-role">Nail Artist</div>
+      <p class="team-desc">Specializes in Gel-X and clean, elegant sets that last.</p>
+    </div>
+    <div class="team-card fade-up">
+      <div class="team-avatar">M</div>
+      <h3>Mindy</h3>
+      <div class="team-role">Nail Artist</div>
+      <p class="team-desc">A client favorite for pedicures, SNS, and making every visit feel relaxing.</p>
     </div>
   </div>
 </section>
 
-<!-- REVIEWS -->
-<section id="reviews">
-  <div class="section-inner">
-    <div class="section-header centered fade-up">
-      <span class="section-label">What Clients Say</span>
-      <h2 class="section-title">4.5★ on Yelp. 5.0★ on Fresha.</h2>
-      <p class="section-desc">Don't take our word for it.</p>
-    </div>
-    <div class="reviews-grid">
-      <div class="review-card fade-up">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"I always leave feeling like a new person. My Gel-X lasts weeks and the team is so sweet every single time."</p>
-        <div class="review-author">— Yelp Review</div>
-        <div class="review-source">Nail'd It! Spa, Stanton</div>
-      </div>
-      <div class="review-card fade-up">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Best pedicure I've ever had. The Happy Pedicure with the callous treatment is absolutely worth it. Booked again before I even left."</p>
-        <div class="review-author">— Fresha Review</div>
-        <div class="review-source">Nail'd It! Spa, Stanton</div>
-      </div>
-      <div class="review-card fade-up">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Came in for a simple manicure and walked out obsessed. Pricing is fair and the nail art is better than anything I've seen nearby."</p>
-        <div class="review-author">— Yelp Review</div>
-        <div class="review-source">Nail'd It! Spa, Stanton</div>
-      </div>
-    </div>
-    <div class="reviews-cta">
-      <p>229+ reviews on Yelp &nbsp;·&nbsp; 185+ reviews on Fresha</p>
-      <a href="https://www.yelp.com/biz/naild-it-spa-stanton" target="_blank" class="btn-outline">Read More Reviews</a>
-    </div>
+<!-- BOOK BANNER (photo) -->
+<div class="book-banner">
+  <img class="book-banner-bg" src="photos/IMG_0880.jpeg" alt="" />
+  <div class="book-banner-overlay"></div>
+  <div class="book-banner-content fade-up">
+    <h2>Ready to treat yourself?</h2>
+    <p>Book online in seconds. Walk-ins always welcome.</p>
+    <a href="http://fresha.com/b/Pgl0k" target="_blank" class="btn-white">Book Your Appointment</a>
   </div>
-</section>
-
-<!-- BOOK CTA BANNER -->
-<div class="book-banner fade-up">
-  <h2>Ready to treat yourself?</h2>
-  <p>Book online in seconds. Walk-ins always welcome.</p>
-  <a href="http://fresha.com/b/Pgl0k" target="_blank" class="btn-white">Book Your Appointment</a>
 </div>
 
 <!-- LOCATION -->
-<section id="location">
-  <div class="section-inner">
-    <div class="section-header fade-up">
-      <span class="section-label">Find Us</span>
-      <h2 class="section-title">Come visit.</h2>
-      <p class="section-desc">We're located in Stanton, CA — easy parking, walk-ins welcome.</p>
+<section class="location" id="location">
+  <div class="location-grid">
+    <div class="fade-up">
+      <span class="eyebrow" style="color:var(--gold)">Find Us</span>
+      <h2>Come visit.</h2>
+      <p class="location-sub">We're in Stanton, CA. Easy parking, walk-ins welcome.</p>
+      <table class="hours-table">
+        <tr><td>Monday – Friday</td><td>9:30 AM – 7:00 PM</td></tr>
+        <tr><td>Saturday</td><td>9:30 AM – 6:00 PM</td></tr>
+        <tr><td>Sunday</td><td>10:00 AM – 5:00 PM</td></tr>
+      </table>
+      <div class="location-details">
+        <p><span class="icon">📍</span>7443 Cerritos Ave, Stanton, CA 90680</p>
+        <p><span class="icon">📞</span>(714) 947-0303</p>
+        <p><span class="icon">🕐</span>Walk-ins welcome · Appointments preferred</p>
+      </div>
     </div>
-    <div class="location-grid">
-      <div class="fade-up">
-        <table class="hours-table">
-          <tr>
-            <td>Monday – Friday</td>
-            <td>9:30 AM – 7:00 PM</td>
-          </tr>
-          <tr>
-            <td>Saturday</td>
-            <td>9:30 AM – 6:00 PM</td>
-          </tr>
-          <tr>
-            <td>Sunday</td>
-            <td>10:00 AM – 5:00 PM</td>
-          </tr>
-        </table>
-        <div class="location-info">
-          <p><span class="icon">📍</span>7443 Cerritos Ave, Stanton, CA 90680</p>
-          <p><span class="icon">📞</span>(714) 947-0303</p>
-          <p><span class="icon">📱</span>Walk-ins welcome · Appointments preferred</p>
-        </div>
-      </div>
-      <div class="map-embed fade-up">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3315.3!2d-118.002!3d33.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z!5e0!3m2!1sen!2sus!4v1"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Nail'd It! Spa location">
-        </iframe>
-      </div>
+    <div class="map-wrap fade-up">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3313.6!2d-118.0045!3d33.8004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd2c4bd3dc20e1%3A0x1!2s7443+Cerritos+Ave%2C+Stanton%2C+CA+90680!5e0!3m2!1sen!2sus!4v1"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Nail'd It! Spa">
+      </iframe>
     </div>
   </div>
 </section>
@@ -1274,23 +1350,30 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-logo">Nail'd It! Spa</div>
-    <p class="footer-tagline">7443 Cerritos Ave, Stanton, CA 90680<br/>(714) 947-0303</p>
-    <div class="footer-links">
-      <a href="#about">Our Story</a>
-      <a href="#services">Services</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#team">Team</a>
-      <a href="http://fresha.com/b/Pgl0k" target="_blank">Book Now</a>
-      <a href="https://www.instagram.com/naildit.spa/" target="_blank">Instagram</a>
-      <a href="https://www.yelp.com/biz/naild-it-spa-stanton" target="_blank">Yelp</a>
-    </div>
-    <p class="footer-copy">© 2025 Nail'd It! Spa · Built by Cal.Zentara</p>
+  <div class="footer-brand">Nail'd It! Spa</div>
+  <div class="footer-links">
+    <a href="#about">Story</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#team">Team</a>
+    <a href="http://fresha.com/b/Pgl0k" target="_blank">Book Now</a>
+    <a href="https://www.instagram.com/naildit.spa/" target="_blank">Instagram</a>
+    <a href="https://www.yelp.com/biz/naild-it-spa-stanton" target="_blank">Yelp</a>
   </div>
+  <p class="footer-copy">© 2025 Nail'd It! Spa · Built by Cal.Zentara</p>
 </footer>
 
 <script>
+  // Nav scroll behavior
+  var nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
   // Mobile menu
   function toggleMenu() {
     document.getElementById('mobile-menu').classList.toggle('open');
@@ -1298,8 +1381,7 @@
 
   // Lightbox
   function openLightbox(el) {
-    var src = el.querySelector('img').src;
-    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox-img').src = el.querySelector('img').src;
     document.getElementById('lightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -1313,26 +1395,16 @@
     if (e.key === 'Escape') closeLightbox();
   });
 
-  // Scroll animations
+  // Scroll fade animations
   var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
+    entries.forEach(function(e) {
+      if (e.isIntersecting) e.target.classList.add('visible');
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
 
   document.querySelectorAll('.fade-up').forEach(function(el) {
     observer.observe(el);
   });
-
-  // Close mobile menu on nav link click
-  document.querySelectorAll('.mobile-menu a').forEach(function(a) {
-    a.addEventListener('click', function() {
-      document.getElementById('mobile-menu').classList.remove('open');
-    });
-  });
 </script>
-
 </body>
 </html>
