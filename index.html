@@ -52,16 +52,17 @@
     }
 
     .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: white;
+      display: flex;
+      align-items: center;
       text-decoration: none;
-      letter-spacing: 0.02em;
-      transition: color 0.4s;
     }
 
-    nav.scrolled .nav-logo { color: var(--dark); }
+    .nav-logo img {
+      height: 46px;
+      width: auto;
+      border-radius: 8px;
+      display: block;
+    }
 
     .nav-links {
       display: flex;
@@ -198,6 +199,14 @@
       position: relative;
       z-index: 1;
       max-width: 700px;
+    }
+
+    .hero-logo {
+      width: 120px;
+      height: auto;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      display: block;
     }
 
     .hero-eyebrow {
@@ -1067,7 +1076,9 @@
 
 <!-- NAV -->
 <nav id="main-nav">
-  <a class="nav-logo" href="#">Nail'd It! Spa</a>
+  <a class="nav-logo" href="#">
+    <img src="logo/Logo.jpeg" alt="Nail'd It! Spa" />
+  </a>
   <ul class="nav-links">
     <li><a href="#about">Story</a></li>
     <li><a href="#services">Services</a></li>
@@ -1094,6 +1105,7 @@
 <div class="hero">
   <div class="sparkles-wrap" id="sparkles"></div>
   <div class="hero-content">
+    <img src="logo/Logo.jpeg" alt="Nail'd It! Spa" class="hero-logo" />
     <span class="hero-eyebrow">Stanton, California &nbsp;·&nbsp; Est. 5+ Years</span>
     <h1>Where every<br/>visit feels<br/>like <em>love.</em></h1>
     <div class="hero-actions">
