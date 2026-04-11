@@ -654,31 +654,89 @@
       margin-bottom: 2px;
     }
 
-    .review-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 36px;
+    /* Slider */
+    .review-slider-wrap {
+      position: relative;
+      margin-top: 40px;
+    }
+
+    .review-slider {
+      overflow: hidden;
+    }
+
+    .review-track {
+      display: flex;
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
     }
 
     .review-card {
+      flex: 0 0 calc(33.333% - 12px);
+      margin-right: 18px;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 12px;
-      padding: 24px;
+      padding: 28px 24px;
+      box-sizing: border-box;
     }
 
-    .review-stars { color: var(--gold); font-size: 13px; letter-spacing: 2px; margin-bottom: 12px; }
+    .review-stars { color: var(--gold); font-size: 13px; letter-spacing: 2px; margin-bottom: 14px; }
 
     .review-text {
       font-size: 14px;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.7;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.75;
       font-style: italic;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
-    .review-author { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.5); }
+    .review-meta { display: flex; flex-direction: column; gap: 2px; }
+    .review-author { font-size: 13px; font-weight: 600; color: white; }
+    .review-location { font-size: 12px; color: rgba(255,255,255,0.4); }
+
+    .slider-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .slider-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .slider-btn:hover { background: rgba(255,255,255,0.15); }
+
+    .slider-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .slider-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .slider-dot.active {
+      background: var(--gold);
+      transform: scale(1.3);
+    }
 
     .reviews-cta {
       text-align: center;
@@ -994,7 +1052,7 @@
       .gallery-editorial { grid-template-columns: repeat(3, 1fr); }
 
       .reviews-section { padding: 48px 20px; }
-      .review-cards { grid-template-columns: 1fr; }
+      .review-card { flex: 0 0 calc(50% - 9px); }
 
       .team { padding: 48px 20px; }
       .team-grid { grid-template-columns: 1fr 1fr; }
@@ -1047,7 +1105,7 @@
 
       .reviews-section { padding: 40px 16px; }
       .reviews-top blockquote { font-size: 1.1rem; }
-      .review-card { padding: 18px; }
+      .review-card { flex: 0 0 100%; padding: 20px 18px; margin-right: 16px; }
       .review-text { font-size: 13px; }
 
       .team { padding: 40px 16px; }
@@ -1305,29 +1363,126 @@
 <div class="reviews-section">
   <div class="reviews-top fade-up">
     <span class="eyebrow">What Clients Say</span>
-    <blockquote>"I always leave feeling like a new person. My Gel-X lasts for weeks and the team makes you feel so welcomed every single time."</blockquote>
+    <blockquote>"Been coming here for a couple of years! Best service ever!! I would come back here every single time!"</blockquote>
     <div class="reviews-ratings">
       <div class="rating-item"><strong>4.5★</strong>229+ Reviews on Yelp</div>
       <div class="rating-item"><strong>5.0★</strong>185+ Reviews on Fresha</div>
     </div>
   </div>
-  <div class="review-cards fade-up">
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">"Best Gel-X I've ever gotten. Lasted over 4 weeks without lifting. I won't go anywhere else."</p>
-      <div class="review-author">— Yelp Review</div>
+
+  <div class="review-slider-wrap fade-up">
+    <div class="review-slider" id="reviewSlider">
+      <div class="review-track" id="reviewTrack">
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Been coming here for a couple of years! Best service ever!! Over the years I have had the best nails. I would come back here every single time!"</p>
+          <div class="review-meta">
+            <span class="review-author">Linette L.</span>
+            <span class="review-location">Garden Grove, CA</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Twee has been doing my nails for many years. I trust them implicitly and her skill/professionalism is second to none. The best. Ever."</p>
+          <div class="review-meta">
+            <span class="review-author">S K.</span>
+            <span class="review-location">Cypress, CA</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Gotta hand it to my girls Nancy and Twee. They take such good care of me every time I've come in. Overall, 10/10!"</p>
+          <div class="review-meta">
+            <span class="review-author">Chris R.</span>
+            <span class="review-location">Westminster, CA</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Typing this review as I'm sitting here getting a pedicure. She's being so thorough. Highly recommend already. The salon is cute and clean. Deff would come back."</p>
+          <div class="review-meta">
+            <span class="review-author">Jailany B.</span>
+            <span class="review-location">Los Angeles, CA</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Amazing experience here! Twee did an amazing job with my nails — I got GelX, and she was incredibly precise and detailed. Great quality and great service."</p>
+          <div class="review-meta">
+            <span class="review-author">Brenda H.</span>
+            <span class="review-location">San Francisco, CA</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"I had the Happy Pedicure and manicure. Twee did a perfect interpretation of a picture I brought her. Thank you, Twee for making my hands feel beautiful!!"</p>
+          <div class="review-meta">
+            <span class="review-author">Michelle S.</span>
+            <span class="review-location">Paramount, CA</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Love the service here! The atmosphere is clean and cute. I never feel rushed and the pedicures are the best! Definitely recommend the VIP pedicure!"</p>
+          <div class="review-meta">
+            <span class="review-author">Nadine L.</span>
+            <span class="review-location">Sylmar, CA</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Twee did an awesome job. She was quick, didn't hurt me AT ALL and her work is very clean. I'll be back for sure."</p>
+          <div class="review-meta">
+            <span class="review-author">Katrina L.</span>
+            <span class="review-location">Newport Beach, CA</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Got a gel manicure by Twee and it's so sleek and pretty. She did a great job."</p>
+          <div class="review-meta">
+            <span class="review-author">Kylie C.</span>
+            <span class="review-location">Newport Beach, CA</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Clean, fast, thorough, friendly. Will go again. Thank you Mindy."</p>
+          <div class="review-meta">
+            <span class="review-author">Bethany D.</span>
+            <span class="review-location">Orange, CA</span>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Great spot, friendly staff, nice relaxing experience, and they worked with me coming in a little towards closing with no sense of a rushed experience."</p>
+          <div class="review-meta">
+            <span class="review-author">James V.</span>
+            <span class="review-location">Costa Mesa, CA</span>
+          </div>
+        </div>
+
+      </div>
     </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">"The Happy Pedicure is incredible. My feet have never felt so smooth. The team is so sweet and welcoming."</p>
-      <div class="review-author">— Fresha Review</div>
-    </div>
-    <div class="review-card">
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">"Came in as a walk-in and they took me right away. Amazing nail art, fair prices. This is my new go-to spot."</p>
-      <div class="review-author">— Yelp Review</div>
+
+    <div class="slider-nav">
+      <button class="slider-btn" id="sliderPrev" aria-label="Previous">&#8592;</button>
+      <div class="slider-dots" id="sliderDots"></div>
+      <button class="slider-btn" id="sliderNext" aria-label="Next">&#8594;</button>
     </div>
   </div>
+
   <div class="reviews-cta fade-up">
     <a href="https://www.yelp.com/biz/naild-it-spa-stanton" target="_blank" class="btn-reviews">Read all reviews on Yelp →</a>
   </div>
@@ -1495,6 +1650,80 @@
   document.querySelectorAll('.fade-up').forEach(function(el) {
     observer.observe(el);
   });
+
+  // Review slider
+  (function() {
+    var track = document.getElementById('reviewTrack');
+    var slider = document.getElementById('reviewSlider');
+    var dotsWrap = document.getElementById('sliderDots');
+    var prevBtn = document.getElementById('sliderPrev');
+    var nextBtn = document.getElementById('sliderNext');
+
+    if (!track) return;
+
+    var cards = track.querySelectorAll('.review-card');
+    var total = cards.length;
+    var perView = window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3;
+    var pages = Math.ceil(total / perView);
+    var current = 0;
+    var autoTimer;
+
+    function buildDots() {
+      dotsWrap.innerHTML = '';
+      for (var i = 0; i < pages; i++) {
+        var d = document.createElement('button');
+        d.className = 'slider-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Go to page ' + (i + 1));
+        d.dataset.i = i;
+        d.addEventListener('click', function() { goTo(parseInt(this.dataset.i)); });
+        dotsWrap.appendChild(d);
+      }
+    }
+
+    function getCardWidth() {
+      if (!cards[0]) return 0;
+      return cards[0].getBoundingClientRect().width + 18;
+    }
+
+    function goTo(page) {
+      current = Math.max(0, Math.min(page, pages - 1));
+      track.style.transform = 'translateX(-' + (current * perView * getCardWidth()) + 'px)';
+      dotsWrap.querySelectorAll('.slider-dot').forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    function startAuto() {
+      autoTimer = setInterval(function() {
+        goTo(current < pages - 1 ? current + 1 : 0);
+      }, 5000);
+    }
+
+    function resetAuto() { clearInterval(autoTimer); startAuto(); }
+
+    prevBtn.addEventListener('click', function() { goTo(current > 0 ? current - 1 : pages - 1); resetAuto(); });
+    nextBtn.addEventListener('click', function() { goTo(current < pages - 1 ? current + 1 : 0); resetAuto(); });
+
+    // Touch support
+    var touchStartX = 0;
+    slider.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    slider.addEventListener('touchend', function(e) {
+      var dx = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(dx) > 40) { goTo(dx > 0 ? (current < pages-1 ? current+1 : 0) : (current > 0 ? current-1 : pages-1)); resetAuto(); }
+    });
+
+    window.addEventListener('resize', function() {
+      perView = window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3;
+      pages = Math.ceil(total / perView);
+      current = 0;
+      buildDots();
+      goTo(0);
+    });
+
+    buildDots();
+    goTo(0);
+    startAuto();
+  })();
 </script>
 </body>
 </html>
