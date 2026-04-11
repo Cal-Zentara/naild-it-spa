@@ -158,26 +158,40 @@
       justify-content: flex-start;
       padding: 48px 48px;
       overflow: hidden;
+      background: linear-gradient(-45deg, #1A0F0A, #6B2E1A, #C4714F, #8B5C2A, #3D1A0A, #C4714F, #1A0F0A);
+      background-size: 500% 500%;
+      animation: gradientShift 16s ease infinite;
     }
 
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    .hero-overlay {
+    /* Sparkles */
+    .sparkles-wrap {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(20, 8, 4, 0.78) 0%,
-        rgba(20, 8, 4, 0.35) 50%,
-        rgba(20, 8, 4, 0.15) 100%
-      );
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .sp {
+      position: absolute;
+      bottom: -20px;
+      font-size: var(--s, 14px);
+      color: var(--c, rgba(201,162,74,0.55));
+      animation: floatUp var(--d, 7s) var(--dl, 0s) ease-in-out infinite;
+      user-select: none;
+      line-height: 1;
+    }
+
+    @keyframes floatUp {
+      0%   { opacity: 0; transform: translateY(0) rotate(0deg) scale(0.8); }
+      15%  { opacity: 1; }
+      85%  { opacity: 0.4; }
+      100% { opacity: 0; transform: translateY(-100vh) rotate(180deg) scale(1.2); }
     }
 
     .hero-content {
@@ -300,8 +314,8 @@
     /* ─── ABOUT (split screen) ─── */
     .about {
       display: grid;
-      grid-template-columns: 55% 45%;
-      min-height: 60vh;
+      grid-template-columns: 42% 58%;
+      max-height: 520px;
     }
 
     .about-photo {
@@ -600,84 +614,90 @@
 
     .lightbox-close:hover { color: white; }
 
-    /* ─── REVIEWS (photo bg) ─── */
+    /* ─── REVIEWS ─── */
     .reviews-section {
-      position: relative;
-      height: 50vh;
-      min-height: 360px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: var(--dark);
+      padding: 64px 48px;
+    }
+
+    .reviews-top {
       text-align: center;
-      overflow: hidden;
+      margin-bottom: 40px;
     }
 
-    .reviews-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
+    .reviews-top .eyebrow { color: var(--gold); margin-bottom: 10px; }
 
-    .reviews-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(20, 8, 4, 0.72);
-    }
-
-    .reviews-content {
-      position: relative;
-      z-index: 1;
-      padding: 28px;
-      max-width: 750px;
-    }
-
-    .reviews-content .eyebrow { color: var(--gold); margin-bottom: 12px; }
-
-    blockquote {
+    .reviews-top blockquote {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.4rem, 3vw, 2.1rem);
+      font-size: clamp(1.3rem, 2.5vw, 1.9rem);
       font-style: italic;
       color: white;
       line-height: 1.5;
-      margin-bottom: 16px;
+      max-width: 680px;
+      margin: 0 auto 20px;
     }
 
     .reviews-ratings {
       display: flex;
       gap: 20px;
       justify-content: center;
-      margin-bottom: 16px;
+      margin-bottom: 0;
     }
 
     .rating-item {
-      color: rgba(255,255,255,0.9);
-      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      font-size: 13px;
     }
 
     .rating-item strong {
       display: block;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       font-family: 'Playfair Display', serif;
       color: var(--gold);
       margin-bottom: 2px;
     }
 
-    .btn-reviews {
+    .review-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .review-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .review-stars { color: var(--gold); font-size: 13px; letter-spacing: 2px; margin-bottom: 12px; }
+
+    .review-text {
+      font-size: 14px;
       color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+
+    .review-author { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.5); }
+
+    .reviews-cta {
+      text-align: center;
+      margin-top: 32px;
+    }
+
+    .btn-reviews {
+      color: rgba(255,255,255,0.55);
       text-decoration: none;
       font-size: 13px;
-      border-bottom: 1px solid rgba(255,255,255,0.3);
+      border-bottom: 1px solid rgba(255,255,255,0.25);
       padding-bottom: 2px;
       transition: color 0.2s, border-color 0.2s;
     }
 
-    .btn-reviews:hover {
-      color: white;
-      border-color: white;
-    }
+    .btn-reviews:hover { color: white; border-color: white; }
 
     /* ─── TEAM ─── */
     .team {
@@ -1041,8 +1061,7 @@
 
 <!-- HERO -->
 <div class="hero">
-  <img class="hero-bg" src="photos/IMG_1898.jpeg" alt="Nail'd It! Spa" />
-  <div class="hero-overlay"></div>
+  <div class="sparkles-wrap" id="sparkles"></div>
   <div class="hero-content">
     <span class="hero-eyebrow">Stanton, California &nbsp;·&nbsp; Est. 5+ Years</span>
     <h1>Where every<br/>visit feels<br/>like <em>love.</em></h1>
@@ -1245,23 +1264,34 @@
   <img id="lightbox-img" src="" alt="" />
 </div>
 
-<!-- REVIEWS (photo bg) -->
+<!-- REVIEWS -->
 <div class="reviews-section">
-  <img class="reviews-bg" src="photos/IMG_1261.png" alt="" />
-  <div class="reviews-overlay"></div>
-  <div class="reviews-content fade-up">
+  <div class="reviews-top fade-up">
     <span class="eyebrow">What Clients Say</span>
     <blockquote>"I always leave feeling like a new person. My Gel-X lasts for weeks and the team makes you feel so welcomed every single time."</blockquote>
     <div class="reviews-ratings">
-      <div class="rating-item">
-        <strong>4.5★</strong>
-        229+ Reviews on Yelp
-      </div>
-      <div class="rating-item">
-        <strong>5.0★</strong>
-        185+ Reviews on Fresha
-      </div>
+      <div class="rating-item"><strong>4.5★</strong>229+ Reviews on Yelp</div>
+      <div class="rating-item"><strong>5.0★</strong>185+ Reviews on Fresha</div>
     </div>
+  </div>
+  <div class="review-cards fade-up">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Best Gel-X I've ever gotten. Lasted over 4 weeks without lifting. I won't go anywhere else."</p>
+      <div class="review-author">— Yelp Review</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The Happy Pedicure is incredible. My feet have never felt so smooth. The team is so sweet and welcoming."</p>
+      <div class="review-author">— Fresha Review</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Came in as a walk-in and they took me right away. Amazing nail art, fair prices. This is my new go-to spot."</p>
+      <div class="review-author">— Yelp Review</div>
+    </div>
+  </div>
+  <div class="reviews-cta fade-up">
     <a href="https://www.yelp.com/biz/naild-it-spa-stanton" target="_blank" class="btn-reviews">Read all reviews on Yelp →</a>
   </div>
 </div>
@@ -1364,6 +1394,29 @@
 </footer>
 
 <script>
+  // Sparkles
+  (function() {
+    var wrap = document.getElementById('sparkles');
+    var chars = ['✦', '✧', '◇', '✦', '✧', '✦'];
+    var colors = [
+      'rgba(201,162,74,0.6)', 'rgba(240,224,176,0.5)',
+      'rgba(196,113,79,0.45)', 'rgba(201,162,74,0.35)',
+      'rgba(255,255,255,0.25)'
+    ];
+    for (var i = 0; i < 22; i++) {
+      var sp = document.createElement('span');
+      sp.className = 'sp';
+      sp.textContent = chars[Math.floor(Math.random() * chars.length)];
+      var size = (10 + Math.random() * 18).toFixed(1);
+      var left = (Math.random() * 98).toFixed(1);
+      var dur  = (6 + Math.random() * 10).toFixed(1);
+      var del  = (Math.random() * 10).toFixed(1);
+      var col  = colors[Math.floor(Math.random() * colors.length)];
+      sp.style.cssText = '--s:'+size+'px;--c:'+col+';--d:'+dur+'s;--dl:'+del+'s;left:'+left+'%';
+      wrap.appendChild(sp);
+    }
+  })();
+
   // Nav scroll behavior
   var nav = document.getElementById('main-nav');
   window.addEventListener('scroll', function() {
