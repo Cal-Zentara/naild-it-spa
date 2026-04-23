@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__kie-ai__generate_veo3_video",
+      "mcp__kie-ai__list_tasks",
+      "mcp__kie-ai__get_task_status",
+      "mcp__brave-search__brave_web_search"
+    ]
+  }
+}

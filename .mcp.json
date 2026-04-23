@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "kie-ai": {
+      "command": "node",
+      "args": ["C:/Users/Aesth/AppData/Roaming/npm/node_modules/@andrewlwn77/kie-ai-mcp-server/dist/index.js"],
+      "env": {
+        "KIE_AI_API_KEY": "b860024b9229b74d1e0f34bb43d4826d"
+      }
+    }
+  }
+}
