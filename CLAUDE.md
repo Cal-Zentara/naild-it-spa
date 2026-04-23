@@ -1,5 +1,87 @@
 # Nail'd It! Spa — Project Docs
 
+## Quick Nav — Read First
+
+| I'm doing... | Read only... |
+|---|---|
+| Continuing work / resuming | `STATUS.md` |
+| Fixing a bug | `STATUS.md` + the section of this doc that maps to the file |
+| Adding a feature | `STATUS.md` + section 4 (Main Website) of this doc |
+| Deploying / publishing | Section 8 (Deployment) |
+| Review automation work | Section 9 (Review System) + `ZentaraHQ/operations/src/naild-it/` |
+| Understanding the whole project | This CLAUDE.md in full |
+
+**Do not explore.** If the answer isn't in the files above, ask before searching.
+
+---
+
+## Dev Reference — Symbol Map / Schema / Gotchas
+
+> Keep line ranges current. If a code change shifts lines, update the table in the same edit.
+
+### Symbol Map
+
+| Feature | File | Lines |
+|---|---|---|
+| Navigation bar | `site/index.html` | 74–190 |
+| Hero + sparkles | `site/index.html` | 192–268 |
+| Photo strip (4 square) | `site/index.html` | 339–364 |
+| About split-screen | `site/index.html` | 366–439 |
+| Services grid (3 columns) | `site/index.html` | 441–578 |
+| Gallery grid + lightbox | `site/index.html` | 580–655 |
+| Review slider (11 cards) | `site/index.html` | 657–813 |
+| Team cards (4 members) | `site/index.html` | 815–886 |
+| Book banner CTA | `site/index.html` | 888–949 |
+| Location + map | `site/index.html` | 951–1019 |
+| Instagram strip | `site/index.html` | 1021–1039 |
+| Footer | `site/index.html` | 1041–1074 |
+| "Serving all OC" cities | `site/index.html` | 1642–1662 |
+| All CSS | `site/index.html` | 48–1193 |
+| JS — nav scroll handler | `site/index.html` | 1709–1717 |
+| JS — mobile menu toggle | `site/index.html` | 1719–1722 |
+| JS — lightbox | `site/index.html` | 1724–1738 |
+| JS — scroll fade-in observer | `site/index.html` | 1740–1749 |
+| JS — review slider engine | `site/index.html` | 1751–1823 |
+| JS — sparkle generator | `site/index.html` | 1685–1707 |
+| Discovery form (full) | `discovery-form/index.html` | 1–1010 |
+| Formspree endpoint (discovery) | `discovery-form/index.html` | 846 |
+| localStorage autosave (discovery) | `discovery-form/index.html` | 916 |
+
+### Data Schema
+
+**Main site (`site/index.html`):** Static — no client-side persistence. All content is hard-coded:
+- Services/prices: lines 1296–1368
+- Team names: lines 1574–1597
+- Review text + names: lines 1451–1548
+- Hours of operation: lines 1619–1623
+- Business address, phone, coordinates (JSON-LD schema): lines 14–45
+
+**External links from main site:**
+- Fresha booking: `http://fresha.com/b/Pgl0k`
+- Google Maps embed: `https://maps.google.com/maps?q=7443+W+Cerritos+Ave,+Stanton,+CA+90680&output=embed`
+- Yelp: `https://www.yelp.com/biz/naild-it-spa-stanton`
+- Google review: `https://g.page/r/CbxE-B-vjlwBEBE/review`
+- Instagram: `https://www.instagram.com/naildit.spa/`
+
+**Discovery form (`discovery-form/index.html`):**
+- localStorage key: `naild_it_form_progress` (autosaves every keystroke)
+- Formspree POST: `https://formspree.io/f/xvzvnkay`
+- Hidden field: `client_name = "Nail'd It! Spa"`
+- Fields: `q_business_name`, `q_years_open`, `q_differentiator`, `q_story`, `q_ideal_client`, `q_referral`, `q_services` (multi-select), `q_pricing`, `q_current_presence`, `q_goals`, `q_timeline`
+
+### Known Gotchas
+
+- **`object-position` class overrides on photo-strip and gallery** (e.g. `img-shift-down-7` at lines 1242, 1245, 1248, 1251) — intentional per-image framing inside square crops.
+- **`--terracotta-dark` redefined twice** — line 52 is the base, line 273 overrides it for italic hero emphasis. Don't consolidate.
+- **Sparkle animation uses inline CSS custom properties** set by JS (line 1704: `--s`, `--c`, `--d`, `--dl`) — don't convert to static CSS.
+- **Map iframe `min-height: 380px` hard-coded** (lines 1016, 1124) — prevents collapse on narrow viewports.
+- **Review slider `perView` recalc has no debounce** — intentional, minor jank during resize is acceptable.
+- **Lightbox `z-index: 300` vs nav `z-index: 100`** — intentional layering to keep nav visible during gallery zoom.
+- **Gallery items use inline `onclick="openLightbox(this)"`** instead of event delegation — works, easier to spot-edit, don't refactor without reason.
+- **Formspree endpoint shared across Cal's clients** — hidden `client_name` field differentiates submissions. Don't change the endpoint; change the hidden field if forking.
+
+---
+
 Client: Dalena Huynh (owner)
 Business: Nail'd It! Spa — 7443 W Cerritos Ave, Stanton, CA 90680
 Phone: (714) 947-0303
