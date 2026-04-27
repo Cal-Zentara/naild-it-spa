@@ -1018,6 +1018,85 @@
       display: block;
     }
 
+    /* ─── FAQ ─── */
+    .faq-section {
+      padding: 64px 48px;
+      background: var(--white);
+    }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .faq-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--dark);
+      margin: 12px 0 8px;
+    }
+
+    .faq-header p {
+      color: var(--text-light);
+      font-size: 15px;
+    }
+
+    .faq-list {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+    }
+
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 0;
+    }
+
+    .faq-question:hover { color: var(--terracotta); }
+
+    .faq-icon {
+      color: var(--gold);
+      font-size: 18px;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+      font-style: normal;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .faq-item.open .faq-answer { max-height: 200px; }
+
+    .faq-answer p {
+      padding-top: 12px;
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
     /* ─── INSTAGRAM STRIP ─── */
     .instagram-strip {
       background: var(--white);
@@ -1189,8 +1268,31 @@
       footer { padding: 24px 16px; }
       .footer-links { gap: 12px; }
       .footer-links a { font-size: 12px; }
+
+      .faq-section { padding: 40px 16px; }
+      .faq-item { padding: 14px 0; }
+      .faq-question { font-size: 15px; }
     }
   </style>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"Do you take walk-ins?","acceptedAnswer":{"@type":"Answer","text":"Yes, walk-ins are welcome anytime during business hours. Appointments are preferred on weekends."}},
+      {"@type":"Question","name":"How much is a Gel-X full set?","acceptedAnswer":{"@type":"Answer","text":"Gel-X full sets start at $55 at Nail'd It! Spa in Stanton, CA."}},
+      {"@type":"Question","name":"Are you Vietnamese-owned?","acceptedAnswer":{"@type":"Answer","text":"Yes, Nail'd It! Spa is Vietnamese-owned and operated."}},
+      {"@type":"Question","name":"What is the difference between Gel-X and acrylic nails?","acceptedAnswer":{"@type":"Answer","text":"Gel-X uses soft gel tips that flex with your natural nail — lighter, thinner, and easier to remove than acrylic. Acrylic is stronger and more rigid, great for extra length and durability."}},
+      {"@type":"Question","name":"How long does a full set take?","acceptedAnswer":{"@type":"Answer","text":"Most services take between 1 and 1.5 hours. Nail art or longer lengths may take a little more time."}},
+      {"@type":"Question","name":"Do I need an appointment?","acceptedAnswer":{"@type":"Answer","text":"No appointment needed — walk-ins are always welcome. We recommend booking ahead on weekends to skip the wait."}},
+      {"@type":"Question","name":"What payment methods do you accept?","acceptedAnswer":{"@type":"Answer","text":"We accept cash and all major credit cards."}},
+      {"@type":"Question","name":"Where is Nail'd It! Spa located?","acceptedAnswer":{"@type":"Answer","text":"We're at 7443 W Cerritos Ave in Stanton, CA — just a short drive from Anaheim, Garden Grove, Cypress, Westminster, Buena Park, and Los Alamitos."}},
+      {"@type":"Question","name":"How do I book an appointment?","acceptedAnswer":{"@type":"Answer","text":"Visit nailditspa.com to book online or call us at (714) 947-0303."}}
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -1609,6 +1711,82 @@
   </div>
 </div>
 
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="faq-header fade-up">
+    <span class="eyebrow" style="color:var(--gold)">Questions</span>
+    <h2>Good to know.</h2>
+    <p>Everything you want to know before you book.</p>
+  </div>
+  <div class="faq-list fade-up">
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Do you take walk-ins?
+        <i class="faq-icon">+</i>
+      </button>
+      <div class="faq-answer"><p>Yes, walk-ins are welcome anytime during business hours. We recommend booking ahead on weekends to skip the wait.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        How much is a Gel-X full set?
+        <i class="faq-icon">+</i>
+      </button>
+      <div class="faq-answer"><p>Gel-X full sets start at $55. Check our services section for full pricing on acrylics, dip, and pedicures.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Are you Vietnamese-owned?
+        <i class="faq-icon">+</i>
+      </button>
+      <div class="faq-answer"><p>Yes. Nail'd It! Spa is Vietnamese-owned and operated. Our team brings years of experience and genuine care to every client.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        What's the difference between Gel-X and acrylic?
+        <i class="faq-icon">+</i>
+      </button>
+      <div class="faq-answer"><p>Gel-X uses soft gel tips that flex with your natural nail — lighter, thinner, and easier to remove. Acrylic is stronger and more rigid, great for extra length and durability. Not sure which is right for you? Ask us when you come in.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        How long does a full set take?
+        <i class="faq-icon">+</i>
+      </button>
+      <div class="faq-answer"><p>Most services take between 1 and 1.5 hours. Nail art or longer lengths may take a little more time.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        What payment methods do you accept?
+        <i class="faq-icon">+</i>
+      </button>
+      <div class="faq-answer"><p>We accept cash and all major credit cards.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Where are you located?
+        <i class="faq-icon">+</i>
+      </button>
+      <div class="faq-answer"><p>We're at 7443 W Cerritos Ave in Stanton, CA — just a short drive from Anaheim, Garden Grove, Cypress, Westminster, Buena Park, and Los Alamitos.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        How do I book an appointment?
+        <i class="faq-icon">+</i>
+      </button>
+      <div class="faq-answer"><p>Book online at nailditspa.com or call us at <a href="tel:+17149470303" style="color:var(--terracotta);">(714) 947-0303</a>.</p></div>
+    </div>
+
+  </div>
+</section>
+
 <!-- LOCATION -->
 <section class="location" id="location">
   <div class="location-grid">
@@ -1821,6 +1999,14 @@
     goTo(0);
     startAuto();
   })();
+
+  // FAQ accordion
+  function toggleFaq(btn) {
+    var item = btn.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
+    if (!isOpen) item.classList.add('open');
+  }
 </script>
 </body>
 </html>
