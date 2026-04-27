@@ -445,6 +445,18 @@
           <span class="error-msg" id="err-referred-by">Please enter the name of who referred you.</span>
         </div>
 
+        <div class="form-group">
+          <label for="nail-tech">Which nail tech did they go to?</label>
+          <select id="nail-tech" name="nail_tech" style="width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;color:var(--dark);background:white;outline:none;transition:border-color 0.2s;-webkit-appearance:none;">
+            <option value="" disabled selected>Select a nail tech</option>
+            <option value="Twee">Twee</option>
+            <option value="Mindy">Mindy</option>
+            <option value="Nancy">Nancy</option>
+            <option value="Dalena">Dalena</option>
+          </select>
+          <span class="error-msg" id="err-nail-tech">Please select a nail tech.</span>
+        </div>
+
         <button type="submit" class="btn-submit" id="submit-btn">Get My Discount</button>
       </form>
     </div>
@@ -479,6 +491,11 @@
           Valid at Nail'd It! Spa &nbsp;·&nbsp; 7443 W Cerritos Ave, Stanton CA<br/>
           One use per person &nbsp;·&nbsp; Cannot be combined with other offers
         </div>
+
+        <div style="text-align:center;margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
+          <p style="font-size:13px;color:var(--text-mid);margin-bottom:10px;">Loved your visit? Leave us a review:</p>
+          <a href="https://g.page/r/CbxE-B-vjlwBEBE/review" target="_blank" style="display:inline-block;background:var(--terracotta);color:white;text-decoration:none;padding:11px 24px;border-radius:99px;font-size:13px;font-weight:600;font-family:'Inter',sans-serif;">Leave a Google Review</a>
+        </div>
       </div>
     </div>
 
@@ -505,6 +522,7 @@
     const name = document.getElementById('your-name').value.trim();
     const phone = document.getElementById('your-phone').value.trim();
     const ref = document.getElementById('referred-by').value.trim();
+    const tech = document.getElementById('nail-tech').value;
     let valid = true;
 
     if (!name) { showError('err-your-name', true); valid = false; }
@@ -515,6 +533,9 @@
 
     if (!ref) { showError('err-referred-by', true); valid = false; }
     else showError('err-referred-by', false);
+
+    if (!tech) { showError('err-nail-tech', true); valid = false; }
+    else showError('err-nail-tech', false);
 
     return valid;
   }
