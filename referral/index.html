@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Refer a Friend — Nail'd It! Spa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blush: #F9EDE8;
+      --terracotta: #C4714F;
+      --terracotta-dark: #A05038;
+      --gold: #C9A24A;
+      --dark: #1A0F0A;
+      --text-mid: #6B4A3A;
+      --text-light: #A0796A;
+      --border: #EDD5C8;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--blush);
+      color: var(--dark);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--dark);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    header img {
+      width: 56px;
+      height: 56px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--dark);
+      padding: 40px 24px 56px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 40px;
+      background: var(--blush);
+      border-radius: 40px 40px 0 0;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: #E8A07A;
+    }
+
+    .hero p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      max-width: 360px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── FORM CARD ── */
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 36px 28px;
+      max-width: 480px;
+      width: calc(100% - 32px);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 8px 40px rgba(26,15,10,0.08);
+    }
+
+    .card-section {
+      padding: 32px 16px 40px;
+    }
+
+    .offer-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--blush);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 28px;
+    }
+
+    .offer-badge-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--terracotta);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .offer-badge-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: white;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    .offer-badge-text {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.4;
+    }
+
+    .offer-badge-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 2px;
+    }
+
+    /* ── FORM ── */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-mid);
+      letter-spacing: 0.02em;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      color: var(--dark);
+      background: white;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    input::placeholder { color: #C4A49A; }
+    input:focus { border-color: var(--terracotta); }
+
+    .field-hint {
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--terracotta);
+      color: white;
+      border: none;
+      border-radius: 99px;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-submit:hover { background: var(--terracotta-dark); }
+    .btn-submit:active { transform: scale(0.98); }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .error-msg {
+      font-size: 12px;
+      color: #c0392b;
+      margin-top: 4px;
+      display: none;
+    }
+
+    /* ── CONFIRMATION ── */
+    #confirmation {
+      display: none;
+    }
+
+    .coupon {
+      background: white;
+      border-radius: 20px;
+      max-width: 480px;
+      width: calc(100% - 32px);
+      margin: 0 auto;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(26,15,10,0.10);
+      position: relative;
+      z-index: 1;
+    }
+
+    .coupon-top {
+      background: var(--dark);
+      padding: 28px 28px 24px;
+      text-align: center;
+    }
+
+    .coupon-top img {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+    .coupon-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--dark);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 99px;
+      margin-bottom: 16px;
+    }
+
+    .coupon-discount {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 14vw, 4.5rem);
+      font-weight: 700;
+      color: white;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .coupon-discount span {
+      font-size: 0.45em;
+      vertical-align: super;
+      color: #E8A07A;
+    }
+
+    .coupon-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0;
+    }
+
+    .coupon-divider {
+      display: flex;
+      align-items: center;
+      background: var(--blush);
+      position: relative;
+    }
+
+    .coupon-divider::before,
+    .coupon-divider::after {
+      content: '';
+      width: 24px;
+      height: 24px;
+      background: var(--dark);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin: -12px -12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .coupon-divider-line {
+      flex: 1;
+      border-top: 2px dashed var(--border);
+      margin: 12px 8px;
+    }
+
+    .coupon-body {
+      padding: 24px 28px 28px;
+      background: white;
+    }
+
+    .coupon-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .coupon-referred {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .coupon-referred strong {
+      color: var(--terracotta);
+      font-weight: 600;
+    }
+
+    .coupon-instructions {
+      background: var(--blush);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .coupon-instructions strong {
+      display: block;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .coupon-fine {
+      font-size: 11px;
+      color: var(--text-light);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .screenshot-hint {
+      text-align: center;
+      padding: 20px 16px 32px;
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .screenshot-hint svg {
+      display: block;
+      margin: 0 auto 8px;
+      width: 22px;
+      height: 22px;
+      stroke: var(--text-light);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: auto;
+      padding: 28px 16px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    footer a {
+      color: var(--terracotta);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="../logo/Logo.jpeg" alt="Nail'd It! Spa" />
+</header>
+
+<!-- FORM STATE -->
+<div id="form-state">
+  <div class="hero">
+    <span class="hero-eyebrow">Nail'd It! Spa &nbsp;·&nbsp; Stanton, CA</span>
+    <h1>You both get<br/><em>10% off.</em></h1>
+    <p>Fill out the form below and show this page at checkout to claim your discount.</p>
+  </div>
+
+  <div class="card-section">
+    <div class="card">
+      <div class="offer-badge">
+        <div class="offer-badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5"/></svg>
+        </div>
+        <div class="offer-badge-text">
+          <strong>Referral Discount</strong>
+          You and your friend each save 10% on your next visit.
+        </div>
+      </div>
+
+      <form id="referral-form" novalidate>
+        <input type="hidden" name="client_name" value="Nail'd It! Spa — Referral" />
+
+        <div class="form-group">
+          <label for="your-name">Your name</label>
+          <input type="text" id="your-name" name="your_name" placeholder="First and last name" autocomplete="name" />
+          <span class="error-msg" id="err-your-name">Please enter your name.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="your-phone">Your phone number</label>
+          <input type="tel" id="your-phone" name="your_phone" placeholder="(714) 000-0000" autocomplete="tel" />
+          <span class="error-msg" id="err-your-phone">Please enter your phone number.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="referred-by">Who referred you?</label>
+          <input type="text" id="referred-by" name="referred_by" placeholder="Their first and last name" />
+          <span class="field-hint">The person who sent you this link.</span>
+          <span class="error-msg" id="err-referred-by">Please enter the name of who referred you.</span>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submit-btn">Get My Discount</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRMATION STATE -->
+<div id="confirmation">
+  <div class="card-section">
+    <div class="coupon">
+      <div class="coupon-top">
+        <img src="../logo/Logo.jpeg" alt="Nail'd It! Spa" />
+        <div class="coupon-badge">Referral Coupon</div>
+        <div class="coupon-discount"><span>%</span>10 <span style="font-size:0.3em;vertical-align:middle;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;font-weight:400;letter-spacing:0.05em;">OFF</span></div>
+        <div class="coupon-label">Your next visit</div>
+      </div>
+
+      <div class="coupon-divider">
+        <div class="coupon-divider-line"></div>
+      </div>
+
+      <div class="coupon-body">
+        <div class="coupon-name" id="confirm-name"></div>
+        <div class="coupon-referred">Referred by <strong id="confirm-referred"></strong></div>
+
+        <div class="coupon-instructions">
+          <strong>How to redeem</strong>
+          Show this screen to staff when you check in. Your 10% discount will be applied at checkout.
+        </div>
+
+        <div class="coupon-fine">
+          Valid at Nail'd It! Spa &nbsp;·&nbsp; 7443 W Cerritos Ave, Stanton CA<br/>
+          One use per person &nbsp;·&nbsp; Cannot be combined with other offers
+        </div>
+      </div>
+    </div>
+
+    <div class="screenshot-hint">
+      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      Screenshot this page and show it at the front desk.
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="https://nailditspa.com">nailditspa.com</a> &nbsp;·&nbsp; (714) 947-0303
+</footer>
+
+<script>
+  const form = document.getElementById('referral-form');
+  const submitBtn = document.getElementById('submit-btn');
+
+  function showError(id, show) {
+    document.getElementById(id).style.display = show ? 'block' : 'none';
+  }
+
+  function validate() {
+    const name = document.getElementById('your-name').value.trim();
+    const phone = document.getElementById('your-phone').value.trim();
+    const ref = document.getElementById('referred-by').value.trim();
+    let valid = true;
+
+    if (!name) { showError('err-your-name', true); valid = false; }
+    else showError('err-your-name', false);
+
+    if (!phone) { showError('err-your-phone', true); valid = false; }
+    else showError('err-your-phone', false);
+
+    if (!ref) { showError('err-referred-by', true); valid = false; }
+    else showError('err-referred-by', false);
+
+    return valid;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    const name = document.getElementById('your-name').value.trim();
+    const phone = document.getElementById('your-phone').value.trim();
+    const ref = document.getElementById('referred-by').value.trim();
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    try {
+      const data = new FormData(form);
+      await fetch('https://formspree.io/f/xvzvnkay', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+    } catch (_) {
+      // still show coupon even if network fails
+    }
+
+    document.getElementById('confirm-name').textContent = name;
+    document.getElementById('confirm-referred').textContent = ref;
+
+    document.getElementById('form-state').style.display = 'none';
+    document.getElementById('confirmation').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
