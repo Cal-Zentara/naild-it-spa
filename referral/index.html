@@ -322,6 +322,12 @@
       background: white;
     }
 
+    .coupon-thankyou {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+
     .coupon-name {
       font-family: 'Playfair Display', serif;
       font-size: 1.4rem;
@@ -479,6 +485,7 @@
       </div>
 
       <div class="coupon-body">
+        <div class="coupon-thankyou">Thank you for coming in today — <span id="confirm-date"></span></div>
         <div class="coupon-name" id="confirm-name"></div>
         <div class="coupon-referred">Referred by <strong id="confirm-referred"></strong></div>
 
@@ -489,7 +496,8 @@
 
         <div class="coupon-fine">
           Valid at Nail'd It! Spa &nbsp;·&nbsp; 7443 W Cerritos Ave, Stanton CA<br/>
-          One use per person &nbsp;·&nbsp; Cannot be combined with other offers
+          One use per person &nbsp;·&nbsp; Cannot be combined with other offers<br/>
+          <strong id="confirm-expiry" style="color:var(--terracotta);font-weight:600;"></strong>
         </div>
 
         <div style="text-align:center;margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
@@ -562,8 +570,15 @@
       // still show coupon even if network fails
     }
 
+    const today = new Date();
+    const expiry = new Date(today);
+    expiry.setDate(expiry.getDate() + 14);
+    const fmt = d => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
     document.getElementById('confirm-name').textContent = name;
     document.getElementById('confirm-referred').textContent = ref;
+    document.getElementById('confirm-date').textContent = fmt(today);
+    document.getElementById('confirm-expiry').textContent = 'Expires ' + fmt(expiry);
 
     document.getElementById('form-state').style.display = 'none';
     document.getElementById('confirmation').style.display = 'block';
