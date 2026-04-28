@@ -452,6 +452,13 @@
         </div>
 
         <div class="form-group">
+          <label for="referrer-phone">Their phone number</label>
+          <input type="tel" id="referrer-phone" name="referrer_phone" placeholder="(714) 000-0000" />
+          <span class="field-hint">So staff can verify they're an existing client.</span>
+          <span class="error-msg" id="err-referrer-phone">Please enter their phone number.</span>
+        </div>
+
+        <div class="form-group">
           <label for="nail-tech">Which nail tech did they go to?</label>
           <select id="nail-tech" name="nail_tech" style="width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;color:var(--dark);background:white;outline:none;transition:border-color 0.2s;-webkit-appearance:none;">
             <option value="" disabled selected>Select a nail tech</option>
@@ -491,7 +498,7 @@
 
         <div class="coupon-instructions">
           <strong>How to redeem</strong>
-          Show this screen to staff when you check in. Your 10% discount will be applied at checkout.
+          Show this screen to staff when you check in. Staff will verify your referrer is an existing client, then apply your 10% discount at checkout.
         </div>
 
         <div class="coupon-fine">
@@ -530,6 +537,7 @@
     const name = document.getElementById('your-name').value.trim();
     const phone = document.getElementById('your-phone').value.trim();
     const ref = document.getElementById('referred-by').value.trim();
+    const refPhone = document.getElementById('referrer-phone').value.trim();
     const tech = document.getElementById('nail-tech').value;
     let valid = true;
 
@@ -541,6 +549,9 @@
 
     if (!ref) { showError('err-referred-by', true); valid = false; }
     else showError('err-referred-by', false);
+
+    if (!refPhone) { showError('err-referrer-phone', true); valid = false; }
+    else showError('err-referrer-phone', false);
 
     if (!tech) { showError('err-nail-tech', true); valid = false; }
     else showError('err-nail-tech', false);
