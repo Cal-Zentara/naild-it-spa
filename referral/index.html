@@ -413,7 +413,7 @@
 <div id="form-state">
   <div class="hero">
     <span class="hero-eyebrow">Nail'd It! Spa &nbsp;·&nbsp; Stanton, CA</span>
-    <h1>You both get<br/><em>10% off.</em></h1>
+    <h1>First visit?<br/><em>10% off.</em></h1>
     <p>Fill out the form below and show this page at checkout to claim your discount.</p>
   </div>
 
@@ -425,7 +425,7 @@
         </div>
         <div class="offer-badge-text">
           <strong>Referral Discount</strong>
-          You and your friend each save 10% on your next visit.
+          First-time visit? Get 10% off when a friend refers you.
         </div>
       </div>
 
@@ -447,27 +447,7 @@
         <div class="form-group">
           <label for="referred-by">Who referred you?</label>
           <input type="text" id="referred-by" name="referred_by" placeholder="Their first and last name" />
-          <span class="field-hint">The person who sent you this link.</span>
           <span class="error-msg" id="err-referred-by">Please enter the name of who referred you.</span>
-        </div>
-
-        <div class="form-group">
-          <label for="referrer-phone">Their phone number</label>
-          <input type="tel" id="referrer-phone" name="referrer_phone" placeholder="(714) 000-0000" />
-          <span class="field-hint">So staff can verify they're an existing client.</span>
-          <span class="error-msg" id="err-referrer-phone">Please enter their phone number.</span>
-        </div>
-
-        <div class="form-group">
-          <label for="nail-tech">Which nail tech did they go to?</label>
-          <select id="nail-tech" name="nail_tech" style="width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;color:var(--dark);background:white;outline:none;transition:border-color 0.2s;-webkit-appearance:none;">
-            <option value="" disabled selected>Select a nail tech</option>
-            <option value="Twee">Twee</option>
-            <option value="Mindy">Mindy</option>
-            <option value="Nancy">Nancy</option>
-            <option value="Dalena">Dalena</option>
-          </select>
-          <span class="error-msg" id="err-nail-tech">Please select a nail tech.</span>
         </div>
 
         <button type="submit" class="btn-submit" id="submit-btn">Get My Discount</button>
@@ -537,8 +517,6 @@
     const name = document.getElementById('your-name').value.trim();
     const phone = document.getElementById('your-phone').value.trim();
     const ref = document.getElementById('referred-by').value.trim();
-    const refPhone = document.getElementById('referrer-phone').value.trim();
-    const tech = document.getElementById('nail-tech').value;
     let valid = true;
 
     if (!name) { showError('err-your-name', true); valid = false; }
@@ -549,12 +527,6 @@
 
     if (!ref) { showError('err-referred-by', true); valid = false; }
     else showError('err-referred-by', false);
-
-    if (!refPhone) { showError('err-referrer-phone', true); valid = false; }
-    else showError('err-referrer-phone', false);
-
-    if (!tech) { showError('err-nail-tech', true); valid = false; }
-    else showError('err-nail-tech', false);
 
     return valid;
   }
