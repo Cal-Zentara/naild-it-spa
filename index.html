@@ -866,17 +866,13 @@
     }
 
     .team-avatar {
-      width: 64px;
-      height: 64px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      background: var(--blush);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: var(--terracotta);
+      object-fit: cover;
+      object-position: center top;
       margin-bottom: 10px;
+      display: block;
     }
 
     .team-card h3 {
@@ -1268,7 +1264,7 @@
       .team { padding: 40px 16px; }
       .team-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
       .team-card { padding-top: 12px; }
-      .team-avatar { width: 48px; height: 48px; font-size: 1.1rem; margin-bottom: 8px; }
+      .team-avatar { width: 56px; height: 56px; margin-bottom: 8px; }
       .team-card h3 { font-size: 1rem; }
       .team-desc { font-size: 12px; }
 
@@ -1692,25 +1688,25 @@
   </div>
   <div class="team-grid">
     <div class="team-card owner fade-up">
-      <div class="team-avatar">D</div>
+      <img class="team-avatar" src="photos/DalenaNails.jpeg" alt="Dalena, owner of Nail'd It! Spa" />
       <h3>Dalena</h3>
       <div class="team-role">Owner & Nail Artist</div>
       <p class="team-desc">Started Nail'd It! Spa with a simple belief — every client deserves to leave feeling loved.</p>
     </div>
     <div class="team-card fade-up">
-      <div class="team-avatar">T</div>
+      <img class="team-avatar" src="photos/TweeNails.jpeg" alt="Twee, nail artist at Nail'd It! Spa" />
       <h3>Twee</h3>
       <div class="team-role">Nail Artist</div>
       <p class="team-desc">Known for intricate nail art and attention to detail on every single set.</p>
     </div>
     <div class="team-card fade-up">
-      <div class="team-avatar">N</div>
+      <img class="team-avatar" src="photos/NancyNails.jpeg" alt="Nancy, nail artist at Nail'd It! Spa" />
       <h3>Nancy</h3>
       <div class="team-role">Nail Artist</div>
       <p class="team-desc">Specializes in Gel-X and clean, elegant sets that last.</p>
     </div>
     <div class="team-card fade-up">
-      <div class="team-avatar">M</div>
+      <img class="team-avatar" src="photos/MindyNails.jpeg" alt="Mindy, nail artist at Nail'd It! Spa" />
       <h3>Mindy</h3>
       <div class="team-role">Nail Artist</div>
       <p class="team-desc">A client favorite for pedicures, SNS, and making every visit feel relaxing.</p>
