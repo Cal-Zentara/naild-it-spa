@@ -1109,6 +1109,86 @@
       line-height: 1.7;
     }
 
+    /* ─── BLOG PREVIEW ─── */
+    .blog-preview {
+      padding: 72px 48px;
+      background: var(--blush);
+    }
+
+    .blog-preview-header {
+      margin-bottom: 40px;
+    }
+
+    .blog-preview-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      color: var(--dark);
+      margin-top: 8px;
+    }
+
+    .blog-preview-header p {
+      font-size: 15px;
+      color: var(--text-light);
+      margin-top: 10px;
+      max-width: 440px;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .blog-card {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+
+    .blog-card:hover {
+      box-shadow: 0 8px 28px rgba(196,113,79,0.13);
+      transform: translateY(-2px);
+    }
+
+    .blog-card-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    .blog-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--dark);
+      line-height: 1.35;
+      flex: 1;
+    }
+
+    .blog-card-desc {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.65;
+    }
+
+    .blog-card-link {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--terracotta);
+      letter-spacing: 0.04em;
+    }
+
+    .blog-card:hover .blog-card-link { color: var(--terracotta-dark); }
+
     /* ─── INSTAGRAM STRIP ─── */
     .instagram-strip {
       background: var(--white);
@@ -1214,6 +1294,9 @@
       .map-wrap { min-height: 280px; }
       .map-wrap iframe { min-height: 280px; }
 
+      .blog-preview { padding: 48px 20px; }
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+
       .instagram-strip { padding: 20px; }
 
       footer { padding: 28px 20px; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
@@ -1281,6 +1364,9 @@
       .footer-links { gap: 12px; }
       .footer-links a { font-size: 12px; }
 
+      .blog-preview { padding: 40px 16px; }
+      .blog-grid { grid-template-columns: 1fr; }
+
       .faq-section { padding: 40px 16px; }
       .faq-item { padding: 14px 0; }
       .faq-question { font-size: 15px; }
@@ -1319,6 +1405,7 @@
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#location">Visit</a></li>
+    <li><a href="#blog">Blog</a></li>
   </ul>
   <a class="nav-book" href="http://fresha.com/b/Pgl0k" target="_blank">Book Now</a>
   <div class="nav-hamburger" onclick="toggleMenu()">
@@ -1332,6 +1419,7 @@
   <a href="#gallery" onclick="toggleMenu()">Gallery</a>
   <a href="#team" onclick="toggleMenu()">Team</a>
   <a href="#location" onclick="toggleMenu()">Visit Us</a>
+  <a href="#blog" onclick="toggleMenu()">Blog</a>
   <a class="mobile-book" href="http://fresha.com/b/Pgl0k" target="_blank">Book Now</a>
 </div>
 
@@ -1723,6 +1811,53 @@
   </div>
 </div>
 
+<!-- BLOG PREVIEW -->
+<section class="blog-preview" id="blog">
+  <div class="blog-preview-header fade-up">
+    <span class="eyebrow">From the Blog</span>
+    <h2>Nail care, explained.</h2>
+    <p>Real answers from the techs at Nail'd It — no fluff, no upsell.</p>
+  </div>
+  <div class="blog-grid fade-up">
+    <a class="blog-card" href="blog/how-often-nail-fill/">
+      <span class="blog-card-eyebrow">Nail Fills</span>
+      <h3>How Often Should You Get a Nail Fill?</h3>
+      <p class="blog-card-desc">The fill schedule that keeps your nails looking fresh without overspending at the salon.</p>
+      <span class="blog-card-link">Read &rarr;</span>
+    </a>
+    <a class="blog-card" href="blog/how-much-do-acrylic-nails-cost/">
+      <span class="blog-card-eyebrow">Pricing</span>
+      <h3>How Much Do Acrylic Nails Cost?</h3>
+      <p class="blog-card-desc">Full set from $50 in Stanton. What's included, what drives the price up, and how to budget smart.</p>
+      <span class="blog-card-link">Read &rarr;</span>
+    </a>
+    <a class="blog-card" href="blog/what-is-gel-x-nails/">
+      <span class="blog-card-eyebrow">Gel-X</span>
+      <h3>What Is Gel-X? Everything You Need to Know</h3>
+      <p class="blog-card-desc">Softer than acrylic, flexible like a natural nail. Here's what makes Gel-X different.</p>
+      <span class="blog-card-link">Read &rarr;</span>
+    </a>
+    <a class="blog-card" href="blog/dip-powder-vs-gel-nails/">
+      <span class="blog-card-eyebrow">Comparison</span>
+      <h3>Dip Powder vs Gel Nails: Honest Comparison</h3>
+      <p class="blog-card-desc">Wear time, removal, cost, and which one fits your life — answered honestly by our Stanton techs.</p>
+      <span class="blog-card-link">Read &rarr;</span>
+    </a>
+    <a class="blog-card" href="blog/how-long-do-acrylic-nails-last/">
+      <span class="blog-card-eyebrow">Acrylics</span>
+      <h3>How Long Do Acrylic Nails Last?</h3>
+      <p class="blog-card-desc">What actually affects lifespan — and how to make your set go the distance.</p>
+      <span class="blog-card-link">Read &rarr;</span>
+    </a>
+    <a class="blog-card" href="blog/nail-art-trends-2026-orange-county/">
+      <span class="blog-card-eyebrow">Trends</span>
+      <h3>Nail Art Trends 2026 — What's Big in Orange County</h3>
+      <p class="blog-card-desc">Floral nail art, soft ombre, glazed finishes — the looks clients are asking for right now.</p>
+      <span class="blog-card-link">Read &rarr;</span>
+    </a>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="faq-section" id="faq">
   <div class="faq-header fade-up">
@@ -1865,6 +2000,7 @@
     <a href="#services">Services</a>
     <a href="#gallery">Gallery</a>
     <a href="#team">Team</a>
+    <a href="#blog">Blog</a>
     <a href="http://fresha.com/b/Pgl0k" target="_blank">Book Now</a>
     <a href="https://www.instagram.com/naildit.spa/" target="_blank">Instagram</a>
     <a href="https://www.yelp.com/biz/naild-it-spa-stanton" target="_blank">Yelp</a>
